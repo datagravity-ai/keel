@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/keel-hq/keel/internal/k8s"
-	"github.com/keel-hq/keel/internal/policy"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/util/timeutil"
+	"github.com/datagravity-ai/keel/internal/k8s"
+	"github.com/datagravity-ai/keel/internal/policy"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/util/timeutil"
 
 	apps_v1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/core/v1"

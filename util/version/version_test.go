@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/types"
 )
 
 func TestGetVersionFromImageName(t *testing.T) {

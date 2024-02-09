@@ -8,11 +8,11 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/keel-hq/keel/approvals"
-	"github.com/keel-hq/keel/extension/notification"
-	"github.com/keel-hq/keel/internal/policy"
-	"github.com/keel-hq/keel/pkg/store/sql"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/approvals"
+	"github.com/datagravity-ai/keel/extension/notification"
+	"github.com/datagravity-ai/keel/internal/policy"
+	"github.com/datagravity-ai/keel/pkg/store/sql"
+	"github.com/datagravity-ai/keel/types"
 	"sigs.k8s.io/yaml"
 
 	"helm.sh/helm/v3/pkg/chart"

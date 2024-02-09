@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/keel-hq/keel/constants"
-	"github.com/keel-hq/keel/registry/docker"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/datagravity-ai/keel/registry/docker"
 )
 
 func TestDigest(t *testing.T) {

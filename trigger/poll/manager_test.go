@@ -7,17 +7,17 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/keel-hq/keel/approvals"
-	"github.com/keel-hq/keel/pkg/store/sql"
+	"github.com/datagravity-ai/keel/approvals"
+	"github.com/datagravity-ai/keel/pkg/store/sql"
 
-	// "github.com/keel-hq/keel/cache/memory"
-	"github.com/keel-hq/keel/provider"
-	"github.com/keel-hq/keel/registry"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/util/image"
+	// "github.com/datagravity-ai/keel/cache/memory"
+	"github.com/datagravity-ai/keel/provider"
+	"github.com/datagravity-ai/keel/registry"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/util/image"
 
-	// "github.com/keel-hq/keel/extension/credentialshelper"
-	_ "github.com/keel-hq/keel/extension/credentialshelper/aws"
+	// "github.com/datagravity-ai/keel/extension/credentialshelper"
+	_ "github.com/datagravity-ai/keel/extension/credentialshelper/aws"
 
 	"testing"
 )

@@ -4,9 +4,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/keel-hq/keel/internal/policy"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/util/image"
+	"github.com/datagravity-ai/keel/internal/policy"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/util/image"
 	"helm.sh/helm/v3/pkg/chartutil"
 )
 

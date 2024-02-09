@@ -9,9 +9,9 @@ import (
 
 	"github.com/tbruyelle/hipchat-go/hipchat"
 
-	"github.com/keel-hq/keel/constants"
-	"github.com/keel-hq/keel/extension/notification"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/datagravity-ai/keel/extension/notification"
+	"github.com/datagravity-ai/keel/types"
 
 	log "github.com/sirupsen/logrus"
 )

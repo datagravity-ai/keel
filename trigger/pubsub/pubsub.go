@@ -13,9 +13,9 @@ import (
 	"google.golang.org/api/option"
 	"google.golang.org/grpc"
 
-	"github.com/keel-hq/keel/provider"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/util/image"
+	"github.com/datagravity-ai/keel/provider"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/util/image"
 
 	log "github.com/sirupsen/logrus"
 )

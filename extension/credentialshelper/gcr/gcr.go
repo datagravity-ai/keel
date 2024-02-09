@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/keel-hq/keel/extension/credentialshelper"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/extension/credentialshelper"
+	"github.com/datagravity-ai/keel/types"
 )
 
 func init() {

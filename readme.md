@@ -3,16 +3,16 @@
 </p>
 
 <p align="center">
-  <a href="https://goreportcard.com/report/github.com/keel-hq/keel">
-    <img src="https://goreportcard.com/badge/github.com/keel-hq/keel" alt="Go Report">
+  <a href="https://goreportcard.com/report/github.com/datagravity-ai/keel">
+    <img src="https://goreportcard.com/badge/github.com/datagravity-ai/keel" alt="Go Report">
   </a>
   
   <a href="https://img.shields.io/docker/pulls/keelhq/keel.svg">
     <img src="https://img.shields.io/docker/pulls/keelhq/keel.svg" alt="Docker Pulls">
   </a>
 
-  <a href="https://drone-kr.webrelay.io/keel-hq/keel">
-    <img src="https://drone-kr.webrelay.io/api/badges/keel-hq/keel/status.svg" alt="Drone Status">
+  <a href="https://drone-kr.webrelay.io/datagravity-ai/keel">
+    <img src="https://drone-kr.webrelay.io/api/badges/datagravity-ai/keel/status.svg" alt="Drone Status">
   </a>
 </p>
 
@@ -35,7 +35,7 @@ Keel provides several key features:
 
 * __[Native, DockerHub, Quay and Azure container registry webhooks](https://keel.sh/docs/#triggers) support__ -  once webhook is received impacted deployments will be identified and updated.
 
-*  __[Polling](https://keel.sh/docs/#polling)__ - when webhooks and pubsub aren't available - Keel can still be useful by checking Docker Registry for new tags (if current tag is semver) or same tag SHA digest change (ie: `latest`).
+* __[Polling](https://keel.sh/docs/#polling)__ - when webhooks and pubsub aren't available - Keel can still be useful by checking Docker Registry for new tags (if current tag is semver) or same tag SHA digest change (ie: `latest`).
 
 * __Notifications__ - out of the box Keel has Slack, Hipchat, Mattermost and standard webhook notifications, more info [here](https://keel.sh/docs/#notifications)
 
@@ -46,6 +46,7 @@ Keel provides several key features:
 ### Support
 
 Support Keel's development by:
+
 * Star this repository
 * [Follow on Twitter](https://twitter.com/keel_hq)
 
@@ -81,7 +82,7 @@ To install for Helm v3, set helmProvider.version="v3" (default is "v2"):
 helm install keel keel/keel --set helmProvider.version="v3" 
 ```
 
-That's it, see [Configuration](https://github.com/keel-hq/keel#configuration) section now.
+That's it, see [Configuration](https://github.com/datagravity-ai/keel#configuration) section now.
 
 ### Quick Start
 
@@ -132,10 +133,9 @@ Documentation is viewable on the Keel Website:
 
 [https://keel.sh/docs/#introduction](https://keel.sh/docs/#introduction)
 
-
 ### Contributing
 
-Before starting to work on some big or medium features - raise an issue [here](https://github.com/keel-hq/keel/issues) so we can coordinate our efforts. 
+Before starting to work on some big or medium features - raise an issue [here](https://github.com/datagravity-ai/keel/issues) so we can coordinate our efforts.
 
 We use pull requests, so:
 
@@ -145,14 +145,14 @@ We use pull requests, so:
 
 ### Developing Keel
 
-If you wish to work on Keel itself, you will need Go 1.12+ installed. Make sure you put Keel into correct Gopath and `go build` (dependency management is done through [dep](https://github.com/golang/dep)). 
+If you wish to work on Keel itself, you will need Go 1.12+ installed. Make sure you put Keel into correct Gopath and `go build` (dependency management is done through [dep](https://github.com/golang/dep)).
 
 To test Keel while developing:
 
 1. Launch a Kubernetes cluster like Minikube or Docker for Mac with Kubernetes.
 2. Change config to use it: `kubectl config use-context docker-for-desktop`
-3. Build Keel from `cmd/keel` directory. 
-4. Start Keel with: `keel --no-incluster`. This will use Kubeconfig from your home. 
+3. Build Keel from `cmd/keel` directory.
+4. Start Keel with: `keel --no-incluster`. This will use Kubeconfig from your home.
 
 ### Running unit tests
 
@@ -171,9 +171,9 @@ make test
 ### Running e2e tests
 
 Prerequisites:
-- configured kubectl + kubeconfig
-- a running cluster (test suite will create testing namespaces and delete them after tests)
-- Go environment (will compile Keel before running)
+* configured kubectl + kubeconfig
+* a running cluster (test suite will create testing namespaces and delete them after tests)
+* Go environment (will compile Keel before running)
 
 Once prerequisites are ready:
 

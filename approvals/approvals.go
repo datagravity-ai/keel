@@ -9,9 +9,9 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/datagravity-ai/keel/pkg/store"
+	"github.com/datagravity-ai/keel/types"
 	"github.com/google/uuid"
-	"github.com/keel-hq/keel/pkg/store"
-	"github.com/keel-hq/keel/types"
 
 	log "github.com/sirupsen/logrus"
 )

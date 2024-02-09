@@ -3,14 +3,14 @@ GIT_REVISION	= $(shell git rev-parse --short HEAD)
 VERSION		?= $(shell git describe --tags --abbrev=0)
 
 LDFLAGS		+= -linkmode external -extldflags -static
-LDFLAGS		+= -X github.com/datagravity-aikeel/version.Version=$(VERSION)
-LDFLAGS		+= -X github.com/datagravity-aikeel/version.Revision=$(GIT_REVISION)
-LDFLAGS		+= -X github.com/datagravity-aikeel/version.BuildDate=$(JOBDATE)
+LDFLAGS		+= -X github.com/datagravity-ai/keel/version.Version=$(VERSION)
+LDFLAGS		+= -X github.com/datagravity-ai/keel/version.Revision=$(GIT_REVISION)
+LDFLAGS		+= -X github.com/datagravity-ai/keel/version.BuildDate=$(JOBDATE)
 
 ARMFLAGS		+= -a -v
-ARMFLAGS		+= -X github.com/datagravity-aikeel/version.Version=$(VERSION)
-ARMFLAGS		+= -X github.com/datagravity-aikeel/version.Revision=$(GIT_REVISION)
-ARMFLAGS		+= -X github.com/datagravity-aikeel/version.BuildDate=$(JOBDATE)
+ARMFLAGS		+= -X github.com/datagravity-ai/keel/version.Version=$(VERSION)
+ARMFLAGS		+= -X github.com/datagravity-ai/keel/version.Revision=$(GIT_REVISION)
+ARMFLAGS		+= -X github.com/datagravity-ai/keel/version.BuildDate=$(JOBDATE)
 
 .PHONY: release
 
@@ -34,20 +34,20 @@ build-arm:
 	# cd cmd/keel && env GOARCH=arm64 GOOS=linux go build -ldflags="$(ARMFLAGS)" -o release/keel-linux-aarc64
 
 armhf-latest:
-	docker build -t keelhq/keel-arm:latest -f Dockerfile.armhf .
-	docker push keelhq/keel-arm:latest
+	docker build -t datagravity-ai/keel-arm:latest -f Dockerfile.armhf .
+	docker push datagravity-ai/keel-arm:latest
 
 aarch64-latest:
-	docker build -t keelhq/keel-aarch64:latest -f Dockerfile.aarch64 .
-	docker push keelhq/keel-aarch64:latest
+	docker build -t datagravity-ai/keel-aarch64:latest -f Dockerfile.aarch64 .
+	docker push datagravity-ai/keel-aarch64:latest
 
 armhf:
-	docker build -t keelhq/keel-arm:$(VERSION) -f Dockerfile.armhf .
-	# docker push keelhq/keel-arm:$(VERSION)
+	docker build -t datagravity-ai/keel-arm:$(VERSION) -f Dockerfile.armhf .
+	# docker push datagravity-ai/keel-arm:$(VERSION)
 
 aarch64:
-	docker build -t keelhq/keel-aarch64:$(VERSION) -f Dockerfile.aarch64 .
-	docker push keelhq/keel-aarch64:$(VERSION)
+	docker build -t datagravity-ai/keel-aarch64:$(VERSION) -f Dockerfile.aarch64 .
+	docker push datagravity-ai/keel-aarch64:$(VERSION)
 
 arm: build-arm fetch-certs armhf aarch64
 
@@ -61,24 +61,24 @@ build:
 
 install:
 	@echo "++ Installing keel"
-	# CGO_ENABLED=0 GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/datagravity-aikeel/cmd/keel	
-	GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/datagravity-aikeel/cmd/keel	
+	# CGO_ENABLED=0 GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/datagravity-ai/keel/cmd/keel	
+	GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/datagravity-ai/keel/cmd/keel	
 
 image:
-	docker build -t keelhq/keel:alpha -f Dockerfile .
+	docker build -t datagravity-ai/keel:alpha -f Dockerfile .
 
 image-debian:
-	docker build -t keelhq/keel:alpha -f Dockerfile.debian .
+	docker build -t datagravity-ai/keel:alpha -f Dockerfile.debian .
 
 alpha: image
 	@echo "++ Pushing keel alpha"
-	docker push keelhq/keel:alpha
+	docker push datagravity-ai/keel:alpha
 
 e2e: install
 	cd tests && go test
 
 run:
-	go install github.com/datagravity-aikeel/cmd/keel
+	go install github.com/datagravity-ai/keel/cmd/keel
 	keel --no-incluster --ui-dir ui/dist
 
 lint-ui:
@@ -89,8 +89,8 @@ run-ui:
 	cd ui && yarn run serve
 
 build-ui:
-	docker build -t keelhq/keel:ui -f Dockerfile .
-	docker push keelhq/keel:ui
+	docker build -t datagravity-ai/keel:ui -f Dockerfile .
+	docker push datagravity-ai/keel:ui
 
 run-debug: install
 	DEBUG=true keel --no-incluster

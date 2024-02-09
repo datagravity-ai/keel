@@ -10,10 +10,10 @@ import (
 
 	"github.com/slack-go/slack"
 
-	"github.com/keel-hq/keel/constants"
-	"github.com/keel-hq/keel/extension/notification"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/version"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/datagravity-ai/keel/extension/notification"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/version"
 
 	log "github.com/sirupsen/logrus"
 )

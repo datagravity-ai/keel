@@ -6,7 +6,7 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/keel-hq/keel/provider"
+	"github.com/datagravity-ai/keel/provider"
 
 	log "github.com/sirupsen/logrus"
 )

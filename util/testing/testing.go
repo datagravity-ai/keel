@@ -3,9 +3,9 @@ package testing
 import (
 	"fmt"
 
-	"github.com/keel-hq/keel/internal/k8s"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/util/image"
+	"github.com/datagravity-ai/keel/internal/k8s"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/util/image"
 
 	apps_v1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/core/v1"

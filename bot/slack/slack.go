@@ -12,9 +12,9 @@ import (
 
 	"github.com/slack-go/slack"
 
-	"github.com/keel-hq/keel/bot"
-	"github.com/keel-hq/keel/constants"
-	"github.com/keel-hq/keel/version"
+	"github.com/datagravity-ai/keel/bot"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/datagravity-ai/keel/version"
 
 	log "github.com/sirupsen/logrus"
 )

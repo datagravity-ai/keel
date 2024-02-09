@@ -6,8 +6,8 @@ import (
 	"cloud.google.com/go/pubsub"
 	"golang.org/x/net/context"
 
-	"github.com/keel-hq/keel/approvals"
-	"github.com/keel-hq/keel/provider"
+	"github.com/datagravity-ai/keel/approvals"
+	"github.com/datagravity-ai/keel/provider"
 
 	"testing"
 )

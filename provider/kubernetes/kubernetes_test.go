@@ -7,11 +7,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/keel-hq/keel/approvals"
-	"github.com/keel-hq/keel/extension/notification"
-	"github.com/keel-hq/keel/internal/k8s"
-	"github.com/keel-hq/keel/pkg/store/sql"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/approvals"
+	"github.com/datagravity-ai/keel/extension/notification"
+	"github.com/datagravity-ai/keel/internal/k8s"
+	"github.com/datagravity-ai/keel/pkg/store/sql"
+	"github.com/datagravity-ai/keel/types"
 
 	apps_v1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/core/v1"
@@ -314,10 +314,10 @@ func TestGetImpactedInit(t *testing.T) {
 		{
 			meta_v1.TypeMeta{},
 			meta_v1.ObjectMeta{
-				Name:      "dep-1",
-				Namespace: "xxxx",
+				Name:        "dep-1",
+				Namespace:   "xxxx",
 				Annotations: map[string]string{types.KeelInitContainerAnnotation: "true"},
-				Labels:    map[string]string{types.KeelPolicyLabel: "all"},
+				Labels:      map[string]string{types.KeelPolicyLabel: "all"},
 			},
 			apps_v1.DeploymentSpec{
 				Template: v1.PodTemplateSpec{
@@ -335,10 +335,10 @@ func TestGetImpactedInit(t *testing.T) {
 		{
 			meta_v1.TypeMeta{},
 			meta_v1.ObjectMeta{
-				Name:      "dep-2",
-				Namespace: "xxxx",
+				Name:        "dep-2",
+				Namespace:   "xxxx",
 				Annotations: map[string]string{types.KeelInitContainerAnnotation: "false"},
-				Labels:    map[string]string{"whatever": "all"},
+				Labels:      map[string]string{"whatever": "all"},
 			},
 			apps_v1.DeploymentSpec{
 				Template: v1.PodTemplateSpec{
@@ -957,7 +957,7 @@ func TestEventSentWithReleaseNotes(t *testing.T) {
 				Name:        "deployment-1",
 				Namespace:   "xxxx",
 				Labels:      map[string]string{types.KeelPolicyLabel: "all"},
-				Annotations: map[string]string{types.KeelReleaseNotesURL: "https://github.com/keel-hq/keel/releases"},
+				Annotations: map[string]string{types.KeelReleaseNotesURL: "https://github.com/datagravity-ai/keel/releases"},
 			},
 			apps_v1.DeploymentSpec{
 				Template: v1.PodTemplateSpec{
@@ -1005,8 +1005,8 @@ func TestEventSentWithReleaseNotes(t *testing.T) {
 		t.Errorf("expected level %s, got: %s", types.LevelSuccess, fs.sentEvent.Level)
 	}
 
-	if fs.sentEvent.Message != "Successfully updated deployment xxxx/deployment-1 10.0.0->11.0.0 (gcr.io/v2-namespace/hello-world:11.0.0). Release notes: https://github.com/keel-hq/keel/releases" {
-		t.Errorf("expected 'Successfully updated deployment xxxx/deployment-1 10.0.0->11.0.0 (gcr.io/v2-namespace/hello-world:11.0.0). Release notes: https://github.com/keel-hq/keel/releases' sent message, got: %s", fs.sentEvent.Message)
+	if fs.sentEvent.Message != "Successfully updated deployment xxxx/deployment-1 10.0.0->11.0.0 (gcr.io/v2-namespace/hello-world:11.0.0). Release notes: https://github.com/datagravity-ai/keel/releases" {
+		t.Errorf("expected 'Successfully updated deployment xxxx/deployment-1 10.0.0->11.0.0 (gcr.io/v2-namespace/hello-world:11.0.0). Release notes: https://github.com/datagravity-ai/keel/releases' sent message, got: %s", fs.sentEvent.Message)
 	}
 }
 
