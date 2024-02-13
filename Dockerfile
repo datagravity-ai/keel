@@ -3,7 +3,7 @@ COPY . /go/src/github.com/datagravity-ai/keel
 WORKDIR /go/src/github.com/datagravity-ai/keel
 RUN make install
 
-FROM node:16.20.2-alpine
+FROM node:21.6.1-alpine
 WORKDIR /app
 COPY ui /app
 RUN yarn
