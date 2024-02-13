@@ -111,8 +111,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         with:
           context: .
-          # push: ${{ github.event_name != 'pull_request' }}
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta-ecr.outputs.tags }}
           labels: ${{ steps.meta-ecr.outputs.labels }}
           cache-from: type=gha
