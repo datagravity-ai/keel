@@ -1,4 +1,4 @@
-FROM golang:1.21.3
+FROM golang:1.22.0
 COPY . /go/src/github.com/datagravity-ai/keel
 WORKDIR /go/src/github.com/datagravity-ai/keel
 RUN make install
