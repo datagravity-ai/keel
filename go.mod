@@ -40,7 +40,7 @@ require (
 	github.com/docker/distribution v2.8.3+incompatible
 	github.com/docker/docker v24.0.7+incompatible // indirect
 	github.com/google/uuid v1.4.0
-	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/mux v1.8.1
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jmoiron/sqlx v1.3.5 // indirect
 	github.com/opencontainers/go-digest v1.0.0
