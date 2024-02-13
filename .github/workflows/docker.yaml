@@ -24,9 +24,6 @@ env:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        arch: ["debian","aarch64","armhf"]
     runs-on: ubuntu-latest
     permissions:
       contents: read
