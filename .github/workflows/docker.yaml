@@ -112,12 +112,10 @@ jobs:
       # Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
-        # if: ${{ github.event_name != 'pull_request' }}
         with:
           role-to-assume: arn:aws:iam::580663733917:role/github-actions-${{ github.repository }}
           aws-region: us-west-1
       - name: Login to Amazon ECR
-        # if: ${{ github.event_name != 'pull_request' }}
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
         with:
@@ -144,7 +142,6 @@ jobs:
       # transparency data even for private images, pass --force to cosign below.
       # https://github.com/sigstore/cosign
       - name: Sign the published Docker image - ECR
-        # if: ${{ github.event_name != 'pull_request' }}
         env:
           # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
           TAGS: public.ecr.aws/anomalo/tools/keel:v1
