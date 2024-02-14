@@ -31,7 +31,7 @@ replace helm.sh/helm/v3 => helm.sh/helm/v3 v3.13.1
 replace k8s.io/kubernetes => k8s.io/kubernetes v1.28.3
 
 require (
-	cloud.google.com/go/pubsub v1.34.0
+	cloud.google.com/go/pubsub v1.36.1
 	github.com/Masterminds/semver v1.5.0
 	github.com/aws/aws-sdk-go v1.50.17
 	github.com/containerd/containerd v1.7.11 // indirect
@@ -189,7 +189,7 @@ require (
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20240125205218-1f4bbc51befe // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20240116215550-a9fa1716bcac // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20240125205218-1f4bbc51befe // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240205150955-31a09d347014 // indirect
 	google.golang.org/protobuf v1.32.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
