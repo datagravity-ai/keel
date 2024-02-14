@@ -61,7 +61,7 @@ jobs:
       # Login to public.ecr.aws to be able to push the image
       # Configure AWS credentials
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         if: ${{ github.event_name != 'pull_request' }}
         with:
           role-to-assume: arn:aws:iam::580663733917:role/github-actions
