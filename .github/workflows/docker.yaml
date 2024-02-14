@@ -23,7 +23,7 @@ env:
 
 
 jobs:
-  build:
+  build-docker:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -67,9 +67,9 @@ jobs:
           role-to-assume: ${{ env.GHA_AWS_ROLE_ARN }}
           aws-region: us-east-1
       - name: Login to Amazon ECR
+        if: ${{ github.event_name != 'pull_request' }}
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-        if: ${{ github.event_name != 'pull_request' }}
         with:
           registry-type: public
           
@@ -86,9 +86,10 @@ jobs:
       - name: Extract Docker metadata
         id: meta-ecr
         uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
-        if: ${{ github.event_name != 'pull_request' }}
         with:
           images: public.ecr.aws/anomalo/tools/keel
+          tags: |
+            type=sha,format=long
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
@@ -108,7 +109,6 @@ jobs:
       - name: Build and push Docker image
         id: build-and-push-ecr
         uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5.1.0
-        if: ${{ github.event_name != 'pull_request' }}
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
@@ -142,7 +142,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         env:
           # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
-          TAGS: public.ecr.aws/anomalo/tools/keel:v1
+          TAGS: ${{ steps.meta-ecr.outputs.tags }}
           DIGEST: ${{ steps.build-and-push-ecr.outputs.digest }}
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
