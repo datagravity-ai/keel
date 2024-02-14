@@ -62,10 +62,12 @@ jobs:
       # Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
+        if: ${{ github.event_name != 'pull_request' }}
         with:
           role-to-assume: arn:aws:iam::580663733917:role/github-actions
           aws-region: us-east-1
       - name: Login to Amazon ECR
+        if: ${{ github.event_name != 'pull_request' }}
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
         with:
@@ -109,8 +111,7 @@ jobs:
         uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5.1.0
         with:
           context: .
-          # push: ${{ github.event_name != 'pull_request' }}
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta-ecr.outputs.tags }}
           labels: ${{ steps.meta-ecr.outputs.labels }}
           cache-from: type=gha
@@ -138,6 +139,7 @@ jobs:
       # transparency data even for private images, pass --force to cosign below.
       # https://github.com/sigstore/cosign
       - name: Sign the published Docker image - ECR
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
           TAGS: ${{ steps.meta-ecr.outputs.tags }}
