@@ -56,7 +56,7 @@ require (
 	github.com/urfave/negroni v1.0.0
 	golang.org/x/crypto v0.21.0 // indirect
 	golang.org/x/net v0.22.0
-	google.golang.org/api v0.168.0
+	google.golang.org/api v0.169.0
 	google.golang.org/grpc v1.62.1
 	helm.sh/helm/v3 v3.13.1
 	k8s.io/api v0.29.0
