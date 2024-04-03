@@ -11,6 +11,10 @@ RUN yarn run lint --no-fix
 RUN yarn run build
 
 FROM alpine:latest
+LABEL name="keel"
+LABEL org.opencontainers.image.description Kubernetes Operator to automate Helm, DaemonSet, StatefulSet & Deployment updates
+
+
 RUN apk --no-cache add ca-certificates
 
 VOLUME /data
