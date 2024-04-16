@@ -57,7 +57,7 @@ require (
 	golang.org/x/crypto v0.22.0 // indirect
 	golang.org/x/net v0.24.0
 	google.golang.org/api v0.172.0
-	google.golang.org/grpc v1.63.0
+	google.golang.org/grpc v1.63.2
 	helm.sh/helm/v3 v3.13.1
 	k8s.io/api v0.29.0
 	k8s.io/apimachinery v0.29.0
