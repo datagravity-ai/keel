@@ -33,7 +33,7 @@ replace k8s.io/kubernetes => k8s.io/kubernetes v1.28.3
 require (
 	cloud.google.com/go/pubsub v1.37.0
 	github.com/Masterminds/semver v1.5.0
-	github.com/aws/aws-sdk-go v1.51.22
+	github.com/aws/aws-sdk-go v1.51.31
 	github.com/containerd/containerd v1.7.11 // indirect
 	github.com/daneharrigan/hipchat v0.0.0-20170512185232-835dc879394a
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
