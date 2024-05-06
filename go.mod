@@ -54,8 +54,8 @@ require (
 	github.com/stretchr/testify v1.9.0
 	github.com/tbruyelle/hipchat-go v0.0.0-20170717082847-35aebc99209a
 	github.com/urfave/negroni v1.0.0
-	golang.org/x/crypto v0.22.0 // indirect
-	golang.org/x/net v0.24.0
+	golang.org/x/crypto v0.23.0 // indirect
+	golang.org/x/net v0.25.0
 	google.golang.org/api v0.177.0
 	google.golang.org/grpc v1.63.2
 	helm.sh/helm/v3 v3.13.1
@@ -183,9 +183,9 @@ require (
 	go.starlark.net v0.0.0-20230525235612-a134d8f9ddca // indirect
 	golang.org/x/oauth2 v0.19.0 // indirect
 	golang.org/x/sync v0.7.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
-	golang.org/x/term v0.19.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/sys v0.20.0 // indirect
+	golang.org/x/term v0.20.0 // indirect
+	golang.org/x/text v0.15.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/genproto v0.0.0-20240227224415-6ceb2ff114de // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240314234333-6e1732d8331c // indirect
