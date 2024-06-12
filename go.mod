@@ -31,7 +31,7 @@ replace helm.sh/helm/v3 => helm.sh/helm/v3 v3.14.2
 replace k8s.io/kubernetes => k8s.io/kubernetes v1.28.3
 
 require (
-	cloud.google.com/go/pubsub v1.37.0
+	cloud.google.com/go/pubsub v1.38.0
 	github.com/Masterminds/semver v1.5.0
 	github.com/aws/aws-sdk-go v1.51.22
 	github.com/containerd/containerd v1.7.11 // indirect
@@ -73,7 +73,7 @@ require (
 	cloud.google.com/go/auth v0.3.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.2 // indirect
 	cloud.google.com/go/compute/metadata v0.3.0 // indirect
-	cloud.google.com/go/iam v1.1.6 // indirect
+	cloud.google.com/go/iam v1.1.7 // indirect
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230811130428-ced1acdcaa24 // indirect
 	github.com/Azure/go-ansiterm v0.0.0-20210617225240-d185dfc1b5a1 // indirect
 	github.com/BurntSushi/toml v1.3.2 // indirect
@@ -187,8 +187,8 @@ require (
 	golang.org/x/term v0.19.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
-	google.golang.org/genproto v0.0.0-20240227224415-6ceb2ff114de // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20240314234333-6e1732d8331c // indirect
+	google.golang.org/genproto v0.0.0-20240401170217-c3f982113cda // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20240429193739-8cf5692501f6 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240429193739-8cf5692501f6 // indirect
 	google.golang.org/protobuf v1.34.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
