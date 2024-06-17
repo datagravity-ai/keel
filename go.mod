@@ -33,7 +33,7 @@ replace k8s.io/kubernetes => k8s.io/kubernetes v1.28.3
 require (
 	cloud.google.com/go/pubsub v1.38.0
 	github.com/Masterminds/semver v1.5.0
-	github.com/aws/aws-sdk-go v1.54.0
+	github.com/aws/aws-sdk-go v1.54.2
 	github.com/containerd/containerd v1.7.13 // indirect
 	github.com/daneharrigan/hipchat v0.0.0-20170512185232-835dc879394a
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
@@ -56,7 +56,7 @@ require (
 	github.com/urfave/negroni v1.0.0
 	golang.org/x/crypto v0.24.0 // indirect
 	golang.org/x/net v0.26.0
-	google.golang.org/api v0.183.0
+	google.golang.org/api v0.184.0
 	google.golang.org/grpc v1.64.0
 	helm.sh/helm/v3 v3.13.1
 	k8s.io/api v0.29.0
@@ -205,9 +205,9 @@ require (
 	golang.org/x/text v0.16.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.22.0 // indirect
-	google.golang.org/genproto v0.0.0-20240610135401-a8a62080eff3 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20240604185151-ef581f913117 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240610135401-a8a62080eff3 // indirect
+	google.golang.org/genproto v0.0.0-20240604185151-ef581f913117 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20240528184218-531527333157 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
