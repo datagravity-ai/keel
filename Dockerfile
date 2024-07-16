@@ -1,9 +1,9 @@
-FROM golang:1.22.5
+FROM golang:1.22
 COPY . /go/src/github.com/datagravity-ai/keel
 WORKDIR /go/src/github.com/datagravity-ai/keel
 RUN make install
 
-FROM node:16.20.2-alpine
+FROM node:16.20-alpine
 WORKDIR /app
 COPY ui /app
 RUN yarn
