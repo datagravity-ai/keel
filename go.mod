@@ -31,7 +31,7 @@ replace helm.sh/helm/v3 => helm.sh/helm/v3 v3.14.2
 replace k8s.io/kubernetes => k8s.io/kubernetes v1.28.3
 
 require (
-	cloud.google.com/go/pubsub v1.40.0
+	cloud.google.com/go/pubsub v1.41.0
 	github.com/Masterminds/semver v1.5.0
 	github.com/aws/aws-sdk-go v1.55.5
 	github.com/containerd/containerd v1.7.13 // indirect
