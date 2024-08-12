@@ -1,182 +1,176 @@
-package bot
+package slack
 
 import (
-	"bytes"
-	"context"
 	"fmt"
-	"strings"
-
-	"github.com/datagravity-ai/keel/approvals"
-	"github.com/datagravity-ai/keel/bot/formatter"
-	"github.com/datagravity-ai/keel/types"
-
+	"github.com/keel-hq/keel/bot"
 	log "github.com/sirupsen/logrus"
+	"strings"
+	"unicode"
+
+	"github.com/keel-hq/keel/types"
+	"github.com/slack-go/slack"
 )
 
-type BotRequestApproval func(req *types.Approval) error
-type BotReplyApproval func(approval *types.Approval) error
-
-func (bm *BotManager) SubscribeForApprovals(ctx context.Context, approval BotRequestApproval) error {
-	approvalsCh, err := bm.approvalsManager.Subscribe(ctx)
-	if err != nil {
-		log.Errorf("bot.subscribeForApprovals(): %s", err.Error())
-		return err
-	}
-
-	for {
-		select {
-		case <-ctx.Done():
-			return nil
-		case a := <-approvalsCh:
-			err = approval(a)
-			if err != nil {
-				log.WithFields(log.Fields{
-					"error":    err,
-					"approval": a.Identifier,
-				}).Error("bot.subscribeForApprovals: approval request failed")
-			}
-		}
-	}
+// Request - request approval
+func (b *Bot) RequestApproval(req *types.Approval) error {
+	return b.postApprovalMessageBlock(
+		req.ID,
+		createBlockMessage("Approval required! :mega:", b.name, req),
+	)
 }
 
-func (bm *BotManager) ProcessApprovalResponses(ctx context.Context, reply BotReplyApproval) error {
-	for {
-		select {
-		case <-ctx.Done():
-			return nil
-		case resp := <-bm.approvalsRespCh:
-			switch resp.Status {
-			case types.ApprovalStatusApproved:
-				err := bm.processApprovedResponse(resp, reply)
-				if err != nil {
-					log.WithFields(log.Fields{
-						"error": err,
-					}).Error("bot.processApprovalResponses: failed to process approval response message")
-				}
-			case types.ApprovalStatusRejected:
-				err := bm.processRejectedResponse(resp, reply)
-				if err != nil {
-					log.WithFields(log.Fields{
-						"error": err,
-					}).Error("bot.processApprovalResponses: failed to process approval reject response message")
-				}
-			}
-		}
-	}
-}
-
-func (bm *BotManager) processApprovedResponse(approvalResponse *ApprovalResponse, reply BotReplyApproval) error {
-	trimmed := strings.TrimPrefix(approvalResponse.Text, ApprovalResponseKeyword)
-	identifiers := strings.Split(trimmed, " ")
-	if len(identifiers) == 0 {
-		return nil
+func (b *Bot) ReplyToApproval(approval *types.Approval) error {
+	var title string
+	switch approval.Status() {
+	case types.ApprovalStatusPending:
+		title = "Approval required! :mega:"
+	case types.ApprovalStatusRejected:
+		title = "Change rejected! :negative_squared_cross_mark:"
+	case types.ApprovalStatusApproved:
+		title = "Change approved! :tada:"
 	}
 
-	for _, identifier := range identifiers {
-		if identifier == "" {
-			continue
-		}
-		approval, err := bm.approvalsManager.Approve(identifier, approvalResponse.User)
-		if err != nil {
-			log.WithFields(log.Fields{
-				"error":      err,
-				"identifier": identifier,
-			}).Error("bot.processApprovedResponse: failed to approve")
-			continue
-		}
-
-		err = reply(approval)
-		if err != nil {
-			log.WithFields(log.Fields{
-				"error":      err,
-				"identifier": identifier,
-			}).Error("bot.processApprovedResponse: got error while replying after processing approved approval")
-		}
-	}
+	b.upsertApprovalMessage(approval.ID, createBlockMessage(title, b.name, approval))
 	return nil
 }
 
-func (bm *BotManager) processRejectedResponse(approvalResponse *ApprovalResponse, reply BotReplyApproval) error {
-	trimmed := strings.TrimPrefix(approvalResponse.Text, RejectResponseKeyword)
-	identifiers := strings.Split(trimmed, " ")
-	if len(identifiers) == 0 {
-		return nil
+func createBlockMessage(title string, botName string, req *types.Approval) slack.Blocks {
+	if req.Expired() {
+		title = title + " (Expired)"
 	}
 
-	for _, identifier := range identifiers {
-		approval, err := bm.approvalsManager.Reject(identifier)
-		if err != nil {
-			log.WithFields(log.Fields{
-				"error":      err,
-				"identifier": identifier,
-			}).Error("bot.processApprovedResponse: failed to reject")
+	headerText := slack.NewTextBlockObject(
+		"plain_text",
+		title,
+		true,
+		false,
+	)
+	headerSection := slack.NewHeaderBlock(headerText)
+
+	messageSection := slack.NewTextBlockObject(
+		"mrkdwn",
+		req.Message,
+		false,
+		false,
+	)
+	messageBlock := slack.NewSectionBlock(messageSection, nil, nil)
+
+	votesField := slack.NewTextBlockObject(
+		"mrkdwn",
+		fmt.Sprintf("*Votes:*\n%d/%d", req.VotesReceived, req.VotesRequired),
+		false,
+		false,
+	)
+	deltaField := slack.NewTextBlockObject(
+		"mrkdwn",
+		"*Delta:*\n"+req.Delta(),
+		false,
+		false,
+	)
+	leftDetailSection := slack.NewSectionBlock(
+		nil,
+		[]*slack.TextBlockObject{
+			votesField,
+			deltaField,
+		},
+		nil,
+	)
+
+	identifierField := slack.NewTextBlockObject(
+		"mrkdwn",
+		"*Identifier:*\n"+req.Identifier,
+		false,
+		false,
+	)
+	providerField := slack.NewTextBlockObject(
+		"mrkdwn",
+		"*Provider:*\n"+req.Provider.String(),
+		false,
+		false,
+	)
+	rightDetailSection := slack.NewSectionBlock(nil, []*slack.TextBlockObject{identifierField, providerField}, nil)
+
+	commands := bot.BotEventTextToResponse["help"]
+	var commandTexts []slack.MixedElement
+
+	for i, cmd := range commands {
+		// -- avoid adding first line in commands which is the title.
+		if i == 0 {
 			continue
 		}
+		cmd = addBotMentionToCommand(cmd, botName)
+		commandTexts = append(commandTexts, slack.NewTextBlockObject("mrkdwn", cmd, false, false))
+	}
+	commandsBlock := slack.NewContextBlock("", commandTexts...)
+	header := commands[0]
 
-		err = reply(approval)
-		if err != nil {
-			log.WithFields(log.Fields{
-				"error":      err,
-				"identifier": identifier,
-			}).Error("bot.processApprovedResponse: got error while replying after processing rejected approval")
+	blocks := []slack.Block{
+		headerSection,
+		messageBlock,
+		leftDetailSection,
+		rightDetailSection,
+		slack.NewDividerBlock(),
+		slack.NewContextBlock("", slack.NewTextBlockObject("mrkdwn", header, false, false)),
+		commandsBlock,
+	}
+
+	if req.VotesReceived < req.VotesRequired && !req.Expired() && !req.Rejected {
+		approveButton := slack.NewButtonBlockElement(
+			bot.ApprovalResponseKeyword,
+			req.Identifier,
+			slack.NewTextBlockObject(
+				"plain_text",
+				"Approve",
+				true,
+				false,
+			),
+		)
+		approveButton.Style = slack.StylePrimary
+
+		rejectButton := slack.NewButtonBlockElement(
+			bot.RejectResponseKeyword,
+			req.Identifier,
+			slack.NewTextBlockObject(
+				"plain_text",
+				"Reject",
+				true,
+				false,
+			),
+		)
+		rejectButton.Style = slack.StyleDanger
+
+		actionBlock := slack.NewActionBlock("", approveButton, rejectButton)
+
+		blocks = append(
+			blocks,
+			slack.NewDividerBlock(),
+			actionBlock,
+		)
+	}
+	return slack.Blocks{
+		BlockSet: blocks,
+	}
+}
+
+func addBotMentionToCommand(command string, botName string) string {
+	// -- retrieve the first letter of the command in order to insert bot mention
+	firstLetterPos := -1
+	for i, r := range command {
+		if unicode.IsLetter(r) {
+			firstLetterPos = i
+			break
 		}
 	}
-	return nil
-}
 
-func ApprovalsResponse(approvalsManager approvals.Manager) string {
-	approvals, err := approvalsManager.List()
-	if err != nil {
-		return fmt.Sprintf("got error while fetching approvals: %s", err)
+	if firstLetterPos < 0 {
+		log.Debugf("Unable to find the first letter of the command '%s', let the command without the bot mention.", command)
+		return command
 	}
 
-	if len(approvals) == 0 {
-		return fmt.Sprintf("there are currently no request waiting to be approved.")
-	}
-
-	buf := &bytes.Buffer{}
-
-	approvalCtx := formatter.Context{
-		Output: buf,
-		Format: formatter.NewApprovalsFormat(formatter.TableFormatKey, false),
-	}
-	err = formatter.ApprovalWrite(approvalCtx, approvals)
-
-	if err != nil {
-		return fmt.Sprintf("got error while formatting approvals: %s", err)
-	}
-
-	return buf.String()
-}
-
-func IsApproval(eventUser string, eventText string) (resp *ApprovalResponse, ok bool) {
-	if strings.HasPrefix(strings.ToLower(eventText), ApprovalResponseKeyword) {
-		return &ApprovalResponse{
-			User:   eventUser,
-			Status: types.ApprovalStatusApproved,
-			Text:   eventText,
-		}, true
-	}
-
-	if strings.HasPrefix(strings.ToLower(eventText), RejectResponseKeyword) {
-		return &ApprovalResponse{
-			User:   eventUser,
-			Status: types.ApprovalStatusRejected,
-			Text:   eventText,
-		}, true
-	}
-
-	return nil, false
-}
-
-func RemoveApprovalHandler(identifier string, approvalsManager approvals.Manager) string {
-	approval, err := approvalsManager.Get(identifier)
-	if err != nil {
-		return fmt.Sprintf("approval with identifier '%s' was not found", identifier)
-	}
-	err = approvalsManager.Delete(approval)
-	if err != nil {
-		return fmt.Sprintf("failed to remove '%s' approval: %s.", identifier, err)
-	}
-	return fmt.Sprintf("approval '%s' removed.", identifier)
+	return strings.Replace(
+		command[:firstLetterPos]+fmt.Sprintf("@%s ", botName)+command[firstLetterPos:],
+		"\"",
+		"`",
+		-1,
+	)
 }

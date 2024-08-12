@@ -10,10 +10,10 @@ import (
 
 	"github.com/slack-go/slack"
 
-	"github.com/datagravity-ai/keel/constants"
-	"github.com/datagravity-ai/keel/extension/notification"
-	"github.com/datagravity-ai/keel/types"
-	"github.com/datagravity-ai/keel/version"
+	"github.com/keel-hq/keel/constants"
+	"github.com/keel-hq/keel/extension/notification"
+	"github.com/keel-hq/keel/types"
+	"github.com/keel-hq/keel/version"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -33,8 +33,8 @@ func init() {
 func (s *sender) Configure(config *notification.Config) (bool, error) {
 	var token string
 	// Get configuration
-	if os.Getenv(constants.EnvSlackToken) != "" {
-		token = os.Getenv(constants.EnvSlackToken)
+	if os.Getenv(constants.EnvSlackBotToken) != "" {
+		token = os.Getenv(constants.EnvSlackBotToken)
 	} else {
 		return false, nil
 	}
