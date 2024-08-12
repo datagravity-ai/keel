@@ -1,4 +1,4 @@
-module github.com/keel-hq/keel
+module github.com/datagravity-ai/keel
 
 go 1.21
 

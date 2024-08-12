@@ -4,14 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/keel-hq/keel/bot"
-	"github.com/keel-hq/keel/constants"
-	"github.com/slack-go/slack"
-	"github.com/slack-go/slack/slackevents"
-	"github.com/slack-go/slack/socketmode"
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/datagravity-ai/keel/bot"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/slack-go/slack"
+	"github.com/slack-go/slack/slackevents"
+	"github.com/slack-go/slack/socketmode"
 
 	log "github.com/sirupsen/logrus"
 )

@@ -10,20 +10,20 @@ import (
 
 	"github.com/slack-go/slack"
 
-	"github.com/keel-hq/keel/extension/approval"
-	"github.com/keel-hq/keel/pkg/store/sql"
-	"github.com/keel-hq/keel/provider/kubernetes"
+	"github.com/datagravity-ai/keel/extension/approval"
+	"github.com/datagravity-ai/keel/pkg/store/sql"
+	"github.com/datagravity-ai/keel/provider/kubernetes"
 
-	"github.com/keel-hq/keel/approvals"
-	b "github.com/keel-hq/keel/bot"
+	"github.com/datagravity-ai/keel/approvals"
+	b "github.com/datagravity-ai/keel/bot"
 
-	// "github.com/keel-hq/keel/cache/memory"
-	"github.com/keel-hq/keel/constants"
-	"github.com/keel-hq/keel/types"
+	// "github.com/datagravity-ai/keel/cache/memory"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/datagravity-ai/keel/types"
 
 	"testing"
 
-	testutil "github.com/keel-hq/keel/util/testing"
+	testutil "github.com/datagravity-ai/keel/util/testing"
 )
 
 var botMessagesChannel chan *b.BotMessage
