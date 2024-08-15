@@ -3,12 +3,11 @@ package http
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/prometheus/client_golang/prometheus"
 	"net/http"
 	"strings"
 	"time"
-
-	"github.com/datagravity-ai/keel/types"
-	"github.com/prometheus/client_golang/prometheus"
 
 	log "github.com/sirupsen/logrus"
 )
