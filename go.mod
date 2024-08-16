@@ -34,16 +34,15 @@ replace k8s.io/kubernetes => k8s.io/kubernetes v1.26.3
 
 replace github.com/docker/distribution => github.com/docker/distribution v2.8.1+incompatible
 
-
 require (
 	cloud.google.com/go/pubsub v1.37.0
 	github.com/Masterminds/semver v1.5.0
 	github.com/aws/aws-sdk-go v1.44.240
 	github.com/daneharrigan/hipchat v0.0.0-20170512185232-835dc879394a
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/docker/distribution v2.8.1+incompatible
+	github.com/docker/distribution v2.8.3+incompatible
 	github.com/google/uuid v1.6.0
-	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/mux v1.8.1
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jmoiron/sqlx v1.3.5 // indirect
 	github.com/opencontainers/go-digest v1.0.0
@@ -136,7 +135,7 @@ require (
 	github.com/gregjones/httpcache v0.0.0-20180305231024-9cad4c3443a7 // indirect
 	github.com/huandu/xstrings v1.4.0 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
-	github.com/inconshreveable/mousetrap v1.0.1 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
