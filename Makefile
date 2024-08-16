@@ -34,20 +34,20 @@ build-arm:
 	# cd cmd/keel && env GOARCH=arm64 GOOS=linux go build -ldflags="$(ARMFLAGS)" -o release/keel-linux-aarc64
 
 armhf-latest:
-	docker build -t datagravity-ai/keel-arm:latest -f Dockerfile.armhf .
-	docker push datagravity-ai/keel-arm:latest
+	docker build -t keelhq/keel-arm:latest -f Dockerfile.armhf .
+	docker push keelhq/keel-arm:latest
 
 aarch64-latest:
-	docker build -t datagravity-ai/keel-aarch64:latest -f Dockerfile.aarch64 .
-	docker push datagravity-ai/keel-aarch64:latest
+	docker build -t keelhq/keel-aarch64:latest -f Dockerfile.aarch64 .
+	docker push keelhq/keel-aarch64:latest
 
 armhf:
-	docker build -t datagravity-ai/keel-arm:$(VERSION) -f Dockerfile.armhf .
-	# docker push datagravity-ai/keel-arm:$(VERSION)
+	docker build -t keelhq/keel-arm:$(VERSION) -f Dockerfile.armhf .
+	# docker push keelhq/keel-arm:$(VERSION)
 
 aarch64:
-	docker build -t datagravity-ai/keel-aarch64:$(VERSION) -f Dockerfile.aarch64 .
-	docker push datagravity-ai/keel-aarch64:$(VERSION)
+	docker build -t keelhq/keel-aarch64:$(VERSION) -f Dockerfile.aarch64 .
+	docker push keelhq/keel-aarch64:$(VERSION)
 
 arm: build-arm fetch-certs armhf aarch64
 
@@ -65,14 +65,14 @@ install:
 	GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/datagravity-ai/keel/cmd/keel	
 
 image:
-	docker build -t datagravity-ai/keel:alpha -f Dockerfile .
+	docker build -t keelhq/keel:alpha -f Dockerfile .
 
 image-debian:
-	docker build -t datagravity-ai/keel:alpha -f Dockerfile.debian .
+	docker build -t keelhq/keel:alpha -f Dockerfile.debian .
 
 alpha: image
 	@echo "++ Pushing keel alpha"
-	docker push datagravity-ai/keel:alpha
+	docker push keelhq/keel:alpha
 
 e2e: install
 	cd tests && go test
@@ -89,8 +89,8 @@ run-ui:
 	cd ui && yarn run serve
 
 build-ui:
-	docker build -t datagravity-ai/keel:ui -f Dockerfile .
-	docker push datagravity-ai/keel:ui
+	docker build -t keelhq/keel:ui -f Dockerfile .
+	docker push keelhq/keel:ui
 
 run-debug: install
 	DEBUG=true keel --no-incluster
