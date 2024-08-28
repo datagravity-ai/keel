@@ -37,7 +37,7 @@ replace github.com/docker/distribution => github.com/docker/distribution v2.8.1+
 require (
 	cloud.google.com/go/pubsub v1.42.0
 	github.com/Masterminds/semver v1.5.0
-	github.com/aws/aws-sdk-go v1.44.240
+	github.com/aws/aws-sdk-go v1.55.5
 	github.com/daneharrigan/hipchat v0.0.0-20170512185232-835dc879394a
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/docker/distribution v2.8.3+incompatible
