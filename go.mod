@@ -70,7 +70,7 @@ require (
 
 require (
 	cloud.google.com/go/storage v1.43.0
-	golang.org/x/oauth2 v0.22.0
+	golang.org/x/oauth2 v0.23.0
 )
 
 require (
