@@ -1,4 +1,4 @@
-FROM golang:1.23.0
+FROM golang:1.23.1
 COPY . /go/src/github.com/datagravity-ai/keel
 WORKDIR /go/src/github.com/datagravity-ai/keel
 RUN make build
