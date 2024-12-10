@@ -102,7 +102,7 @@ func (b *buffer) loop(stop <-chan struct{}) {
 		case ev := <-b.ev:
 			switch ev := ev.(type) {
 			case *addEvent:
-				b.rh.OnAdd(ev.obj)
+				b.rh.OnAdd(ev.obj, false)
 			case *updateEvent:
 				b.rh.OnUpdate(ev.oldObj, ev.newObj)
 			case *deleteEvent:
@@ -116,7 +116,7 @@ func (b *buffer) loop(stop <-chan struct{}) {
 	}
 }
 
-func (b *buffer) OnAdd(obj interface{}) {
+func (b *buffer) OnAdd(obj interface{}, isInInitialList bool) {
 	b.send(&addEvent{obj})
 }
 
