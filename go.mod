@@ -30,7 +30,7 @@ require (
 	github.com/urfave/negroni v1.0.0
 	golang.org/x/net v0.31.0
 	google.golang.org/api v0.210.0
-	google.golang.org/grpc v1.67.1
+	google.golang.org/grpc v1.68.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/api v0.31.3
 	k8s.io/apimachinery v0.31.3
