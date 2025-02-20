@@ -38,7 +38,7 @@ require (
 
 require (
 	cloud.google.com/go/storage v1.50.0
-	golang.org/x/oauth2 v0.25.0
+	golang.org/x/oauth2 v0.26.0
 	helm.sh/helm/v3 v3.17.1
 	k8s.io/client-go v0.32.2
 )
