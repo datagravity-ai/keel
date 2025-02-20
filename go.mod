@@ -1,8 +1,6 @@
 module github.com/datagravity-ai/keel
 
-go 1.22.4
-
-toolchain go1.22.6
+go 1.24.0
 
 replace github.com/docker/distribution => github.com/docker/distribution v2.8.1+incompatible
 
