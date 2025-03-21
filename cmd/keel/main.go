@@ -8,8 +8,9 @@ import (
 
 	"context"
 
+	kingpin "github.com/alecthomas/kingpin/v2"
 	"github.com/prometheus/client_golang/prometheus"
-	kingpin "gopkg.in/alecthomas/kingpin.v2"
+
 	kube "k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 
@@ -78,7 +79,9 @@ const (
 
 // kubernetes config, if empty - will default to InCluster
 const (
-	EnvKubernetesConfig = "KUBERNETES_CONFIG"
+	EnvKubernetesConfig    = "KUBERNETES_CONFIG"
+	EnvKubernetesMasterUrl = "KUBERNETES_MASTERURL"
+	EnvKubernetesContext   = "KUBERNETES_CONTEXT"
 )
 
 // EnvDebug - set to 1 or anything else to enable debug logging
@@ -168,6 +171,14 @@ func main() {
 
 	if os.Getenv(EnvKubernetesConfig) != "" {
 		k8sCfg.ConfigPath = os.Getenv(EnvKubernetesConfig)
+	}
+
+	if os.Getenv(EnvKubernetesMasterUrl) != "" {
+		k8sCfg.MasterUrl = os.Getenv(EnvKubernetesMasterUrl)
+	}
+
+	if os.Getenv(EnvKubernetesContext) != "" {
+		k8sCfg.CurrentContext = os.Getenv(EnvKubernetesContext)
 	}
 
 	k8sCfg.InCluster = *inCluster

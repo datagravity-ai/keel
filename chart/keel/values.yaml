@@ -7,6 +7,9 @@ image:
   tag: null
   pullPolicy: Always
 
+# Image pull secrets
+imagePullSecrets: []
+
 # Enable insecure registries
 insecureRegistry: false
 
@@ -247,3 +250,9 @@ persistence:
   enabled: false
   storageClass: "-"
   size: 1Gi
+
+# -- Pod security context (runAsUser, etc.)
+podSecurityContext: {}
+
+# -- Container security context (allowPrivilegeEscalation, etc.)
+containerSecurityContext: {}

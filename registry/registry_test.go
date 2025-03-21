@@ -36,7 +36,7 @@ func TestOCIDigest(t *testing.T) {
 	digest, err := client.Digest(Opts{
 		Registry: "https://index.docker.io",
 		Name:     "vaultwarden/server",
-		Tag:      "1.25.1",
+		Tag:      "1.32.5",
 	})
 
 	if err != nil {
