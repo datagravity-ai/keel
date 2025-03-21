@@ -70,7 +70,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/distribution/distribution/v3 v3.0.0-20230722181636-7b502560cad4
 	github.com/golang-jwt/jwt/v4 v4.5.1
-	golang.org/x/oauth2 v0.24.0
+	golang.org/x/oauth2 v0.27.0
 	helm.sh/helm/v3 v3.16.3
 )
 
