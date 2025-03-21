@@ -3,7 +3,7 @@ COPY . /go/src/github.com/datagravity-ai/keel
 WORKDIR /go/src/github.com/datagravity-ai/keel
 RUN make install
 
-FROM alpine:3.20.3
+FROM alpine:latest
 LABEL name="keel"
 LABEL org.opencontainers.image.description Kubernetes Operator to automate Helm, DaemonSet, StatefulSet & Deployment updates
 
