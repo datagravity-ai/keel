@@ -26,8 +26,6 @@ replace (
 	k8s.io/sample-apiserver => k8s.io/sample-apiserver v0.31.3
 )
 
-replace helm.sh/helm/v3 => helm.sh/helm/v3 v3.13.1
-
 replace k8s.io/kubernetes => k8s.io/kubernetes v1.28.3
 
 require (
