@@ -3,9 +3,9 @@ package auditor
 import (
 	"github.com/google/uuid"
 
-	"github.com/keel-hq/keel/extension/notification"
-	"github.com/keel-hq/keel/pkg/store"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/extension/notification"
+	"github.com/datagravity-ai/keel/pkg/store"
+	"github.com/datagravity-ai/keel/types"
 
 	log "github.com/sirupsen/logrus"
 )

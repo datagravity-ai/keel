@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/keel-hq/keel/secrets"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/secrets"
+	"github.com/datagravity-ai/keel/types"
 	log "github.com/sirupsen/logrus"
 	apps_v1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/core/v1"

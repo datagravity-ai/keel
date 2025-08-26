@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/keel-hq/keel/provider"
+	"github.com/datagravity-ai/keel/provider"
 
 	log "github.com/sirupsen/logrus"
 )

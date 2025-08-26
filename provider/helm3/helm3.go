@@ -6,14 +6,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/keel-hq/keel/approvals"
-	"github.com/keel-hq/keel/internal/policy"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/util/image"
+	"github.com/datagravity-ai/keel/approvals"
+	"github.com/datagravity-ai/keel/internal/policy"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/util/image"
 
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/keel-hq/keel/extension/notification"
+	"github.com/datagravity-ai/keel/extension/notification"
 
 	log "github.com/sirupsen/logrus"
 	"sigs.k8s.io/yaml"

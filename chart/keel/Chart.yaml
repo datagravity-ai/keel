@@ -10,8 +10,8 @@ keywords:
 - kubernetes deployment
 - helm release
 - continuous deployment
-home: https://github.com/keel-hq/keel
+home: https://github.com/datagravity-ai/keel
 sources:
-- https://github.com/keel-hq/keel
+- https://github.com/datagravity-ai/keel
 engine: gotpl
-icon: https://raw.githubusercontent.com/keel-hq/keel/master/static/keel-logo.png
+icon: https://raw.githubusercontent.com/datagravity-ai/keel/master/static/keel-logo.png

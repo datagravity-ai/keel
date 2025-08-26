@@ -1,9 +1,9 @@
 package secrets
 
 import (
-	"github.com/keel-hq/keel/secrets"
+	"github.com/datagravity-ai/keel/secrets"
 
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/types"
 )
 
 // CredentialsHelper - credentials helper that uses kubernetes secrets to get

@@ -10,8 +10,8 @@ import (
 
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 
-	"github.com/keel-hq/keel/pkg/store/sql"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/pkg/store/sql"
+	"github.com/datagravity-ai/keel/types"
 )
 
 func NewTestingUtils() (*sql.SQLStore, func()) {

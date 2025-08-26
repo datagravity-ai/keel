@@ -6,20 +6,19 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
-	"fmt"
 
-	"github.com/keel-hq/keel/constants"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/version"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/version"
 )
 
 func TestTrimLeftChar(t *testing.T) {
 	fmt.Printf("%q\n", "Hello, 世界")
-    fmt.Printf("%q\n", TrimFirstChar(""))
-    fmt.Printf("%q\n", TrimFirstChar("H"))
-    fmt.Printf("%q\n", TrimFirstChar("世"))
-    fmt.Printf("%q\n", TrimFirstChar("Hello"))
-    fmt.Printf("%q\n", TrimFirstChar("世界"))
+	fmt.Printf("%q\n", TrimFirstChar(""))
+	fmt.Printf("%q\n", TrimFirstChar("H"))
+	fmt.Printf("%q\n", TrimFirstChar("世"))
+	fmt.Printf("%q\n", TrimFirstChar("Hello"))
+	fmt.Printf("%q\n", TrimFirstChar("世界"))
 }
 
 func TestTeamsRequest(t *testing.T) {
@@ -43,7 +42,7 @@ func TestTeamsRequest(t *testing.T) {
 			t.Errorf("missing logo url")
 		}
 
-		if !strings.Contains(bodyStr, "**" + types.NotificationPreDeploymentUpdate.String() + "**") {
+		if !strings.Contains(bodyStr, "**"+types.NotificationPreDeploymentUpdate.String()+"**") {
 			t.Errorf("missing deployment type")
 		}
 
@@ -72,8 +71,8 @@ func TestTeamsRequest(t *testing.T) {
 	}
 
 	s.Send(types.EventNotification{
-		Name:      "update deployment",
-		Message:   "message here",
-		Type:      types.NotificationPreDeploymentUpdate,
+		Name:    "update deployment",
+		Message: "message here",
+		Type:    types.NotificationPreDeploymentUpdate,
 	})
 }

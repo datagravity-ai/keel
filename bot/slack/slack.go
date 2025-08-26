@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/keel-hq/keel/bot"
-	"github.com/keel-hq/keel/constants"
+	"github.com/datagravity-ai/keel/bot"
+	"github.com/datagravity-ai/keel/constants"
 	"github.com/slack-go/slack"
 	"github.com/slack-go/slack/slackevents"
 	"github.com/slack-go/slack/socketmode"
@@ -70,7 +70,6 @@ func (b *Bot) Configure(approvalsRespCh chan *bot.ApprovalResponse, botMessagesC
 	b.approvalsChannel = strings.TrimPrefix(channel, "#")
 
 	log.Debugf("Configuring slack with approval channel '%s' and bot '%s'", b.approvalsChannel, b.name)
-
 	debug, _ := strconv.ParseBool(os.Getenv("DEBUG"))
 	api := slack.New(
 		botToken,

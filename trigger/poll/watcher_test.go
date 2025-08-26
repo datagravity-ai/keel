@@ -6,14 +6,14 @@ import (
 	"os"
 	"testing"
 
-	"github.com/keel-hq/keel/approvals"
-	// "github.com/keel-hq/keel/cache/memory"
-	"github.com/keel-hq/keel/extension/credentialshelper"
-	"github.com/keel-hq/keel/internal/policy"
-	"github.com/keel-hq/keel/provider"
-	"github.com/keel-hq/keel/registry"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/util/image"
+	"github.com/datagravity-ai/keel/approvals"
+	// "github.com/datagravity-ai/keel/cache/memory"
+	"github.com/datagravity-ai/keel/extension/credentialshelper"
+	"github.com/datagravity-ai/keel/internal/policy"
+	"github.com/datagravity-ai/keel/provider"
+	"github.com/datagravity-ai/keel/registry"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/util/image"
 )
 
 func mustParse(img string, schedule string) *types.TrackedImage {

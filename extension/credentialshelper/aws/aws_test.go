@@ -4,9 +4,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/keel-hq/keel/registry"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/util/image"
+	"github.com/datagravity-ai/keel/registry"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/util/image"
 )
 
 func TestAWS(t *testing.T) {

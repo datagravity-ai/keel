@@ -3,7 +3,7 @@ package http
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/types"
 	"github.com/prometheus/client_golang/prometheus"
 	"net/http"
 	"strings"

@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	request "github.com/golang-jwt/jwt/v4/request"
-	"github.com/keel-hq/keel/pkg/auth"
+// 	request "github.com/golang-jwt/jwt/v4/request"
+	"github.com/datagravity-ai/keel/pkg/auth"
+	request "github.com/golang-jwt/jwt/request"
 	log "github.com/sirupsen/logrus"
 )
 

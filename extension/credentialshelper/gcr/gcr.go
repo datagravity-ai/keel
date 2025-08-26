@@ -8,8 +8,8 @@ import (
         "strings"
     
         "cloud.google.com/go/storage"
-        "github.com/keel-hq/keel/extension/credentialshelper"
-        "github.com/keel-hq/keel/types"
+        "github.com/datagravity-ai/keel/extension/credentialshelper"
+        "github.com/datagravity-ai/keel/types"
         "golang.org/x/oauth2/google"
 )
 

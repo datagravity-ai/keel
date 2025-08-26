@@ -3,16 +3,16 @@
 </p>
 
 <p align="center">
-  <a href="https://goreportcard.com/report/github.com/keel-hq/keel">
-    <img src="https://goreportcard.com/badge/github.com/keel-hq/keel" alt="Go Report">
+  <a href="https://goreportcard.com/report/github.com/datagravity-ai/keel">
+    <img src="https://goreportcard.com/badge/github.com/datagravity-ai/keel" alt="Go Report">
   </a>
 
   <a href="https://img.shields.io/docker/pulls/keelhq/keel.svg">
     <img src="https://img.shields.io/docker/pulls/keelhq/keel.svg" alt="Docker Pulls">
   </a>
 
-  <a href="https://drone-kr.webrelay.io/keel-hq/keel">
-    <img src="https://drone-kr.webrelay.io/api/badges/keel-hq/keel/status.svg" alt="Drone Status">
+  <a href="https://drone-kr.webrelay.io/datagravity-ai/keel">
+    <img src="https://drone-kr.webrelay.io/api/badges/datagravity-ai/keel/status.svg" alt="Drone Status">
   </a>
 </p>
 
@@ -79,6 +79,43 @@ To install for Helm v3, set helmProvider.version="v3" (default is "v2"):
 
 ```bash
 helm install keel keel/keel --set helmProvider.version="v3" 
+```
+To install using terraform:
+
+```terraform
+resource "helm_release" "keel" {
+  provider   = helm.helm
+  name       = "keel"
+  namespace  = "keel"
+  repository = "https://keel-hq.github.io/keel"
+  chart      = "keel"
+  version    = "v1.0.4"
+
+  set {
+    name  = "basicauth.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "basicauth.user"
+    value = "admin"
+  }
+
+  set {
+    name  = "basicauth.password"
+    value = "admin"
+  }
+
+  set {
+    name  = "image.repository"
+    value = "keelhq/keel"
+  }
+
+  set {
+    name  = "image.tag"
+    value = "0.19.1"
+  }
+}
 ```
 
 To install using terraform:
@@ -173,7 +210,7 @@ Documentation is viewable on the Keel Website:
 
 ### Contributing
 
-Before starting to work on some big or medium features - raise an issue [here](https://github.com/keel-hq/keel/issues) so we can coordinate our efforts. 
+Before starting to work on some big or medium features - raise an issue [here](https://github.com/datagravity-ai/keel/issues) so we can coordinate our efforts. 
 
 We use pull requests, so:
 

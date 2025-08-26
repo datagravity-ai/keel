@@ -3,14 +3,14 @@ GIT_REVISION	= $(shell git rev-parse --short HEAD)
 VERSION		?= $(shell git describe --tags --abbrev=0)
 
 LDFLAGS		+= -linkmode external -extldflags -static
-LDFLAGS		+= -X github.com/keel-hq/keel/version.Version=$(VERSION)
-LDFLAGS		+= -X github.com/keel-hq/keel/version.Revision=$(GIT_REVISION)
-LDFLAGS		+= -X github.com/keel-hq/keel/version.BuildDate=$(JOBDATE)
+LDFLAGS		+= -X github.com/datagravity-ai/keel/version.Version=$(VERSION)
+LDFLAGS		+= -X github.com/datagravity-ai/keel/version.Revision=$(GIT_REVISION)
+LDFLAGS		+= -X github.com/datagravity-ai/keel/version.BuildDate=$(JOBDATE)
 
 ARMFLAGS		+= -a -v
-ARMFLAGS		+= -X github.com/keel-hq/keel/version.Version=$(VERSION)
-ARMFLAGS		+= -X github.com/keel-hq/keel/version.Revision=$(GIT_REVISION)
-ARMFLAGS		+= -X github.com/keel-hq/keel/version.BuildDate=$(JOBDATE)
+ARMFLAGS		+= -X github.com/datagravity-ai/keel/version.Version=$(VERSION)
+ARMFLAGS		+= -X github.com/datagravity-ai/keel/version.Revision=$(GIT_REVISION)
+ARMFLAGS		+= -X github.com/datagravity-ai/keel/version.BuildDate=$(JOBDATE)
 
 .PHONY: release
 
@@ -61,8 +61,13 @@ build:
 
 install:
 	@echo "++ Installing keel"
-	# CGO_ENABLED=0 GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/keel-hq/keel/cmd/keel	
-	GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/keel-hq/keel/cmd/keel	
+	# CGO_ENABLED=0 GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/datagravity-ai/keel/cmd/keel	
+	GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/datagravity-ai/keel/cmd/keel	
+
+install-debug:
+	@echo "++ Installing keel with debug flags"
+	go install github.com/go-delve/delve/cmd/dlv@latest
+	GOOS=linux go install -gcflags "all=-N -l" -ldflags "$(LDFLAGS)" github.com/keel-hq/keel/cmd/keel
 
 install-debug:
 	@echo "++ Installing keel with debug flags"
@@ -83,7 +88,7 @@ e2e: install
 	cd tests && go test
 
 run:
-	go install github.com/keel-hq/keel/cmd/keel
+	go install github.com/datagravity-ai/keel/cmd/keel
 	keel --no-incluster --ui-dir ui/dist
 
 lint-ui:

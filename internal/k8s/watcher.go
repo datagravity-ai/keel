@@ -4,8 +4,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/keel-hq/keel/constants"
-	"github.com/keel-hq/keel/internal/workgroup"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/datagravity-ai/keel/internal/workgroup"
 	"github.com/sirupsen/logrus"
 
 	apps_v1 "k8s.io/api/apps/v1"

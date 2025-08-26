@@ -15,14 +15,14 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/urfave/negroni"
 
-	"github.com/keel-hq/keel/approvals"
-	"github.com/keel-hq/keel/internal/k8s"
-	"github.com/keel-hq/keel/pkg/auth"
-	"github.com/keel-hq/keel/pkg/store"
-	"github.com/keel-hq/keel/provider"
-	"github.com/keel-hq/keel/provider/kubernetes"
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/version"
+	"github.com/datagravity-ai/keel/approvals"
+	"github.com/datagravity-ai/keel/internal/k8s"
+	"github.com/datagravity-ai/keel/pkg/auth"
+	"github.com/datagravity-ai/keel/pkg/store"
+	"github.com/datagravity-ai/keel/provider"
+	"github.com/datagravity-ai/keel/provider/kubernetes"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/version"
 
 	log "github.com/sirupsen/logrus"
 )

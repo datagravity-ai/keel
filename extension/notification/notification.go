@@ -6,9 +6,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/keel-hq/keel/types"
-	"github.com/keel-hq/keel/util/stopper"
-	"github.com/keel-hq/keel/util/timeutil"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/util/stopper"
+	"github.com/datagravity-ai/keel/util/timeutil"
 
 	log "github.com/sirupsen/logrus"
 )

@@ -3,10 +3,11 @@ package http
 import (
 	"net/http"
 
-	"github.com/keel-hq/keel/internal/k8s"
-	"github.com/keel-hq/keel/internal/policy"
+	"github.com/datagravity-ai/keel/internal/k8s"
+	"github.com/datagravity-ai/keel/internal/policy"
+  
+  "github.com/datagravity-ai/keel/provider/kubernetes"
 
-	"github.com/keel-hq/keel/provider/kubernetes"
 )
 
 type resource struct {

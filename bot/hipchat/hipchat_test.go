@@ -10,14 +10,14 @@ import (
 
 	h "github.com/daneharrigan/hipchat"
 
-	"github.com/keel-hq/keel/approvals"
-	b "github.com/keel-hq/keel/bot"
-	"github.com/keel-hq/keel/pkg/store/sql"
+	"github.com/datagravity-ai/keel/approvals"
+	b "github.com/datagravity-ai/keel/bot"
+	"github.com/datagravity-ai/keel/pkg/store/sql"
 
-	"github.com/keel-hq/keel/provider/kubernetes"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/provider/kubernetes"
+	"github.com/datagravity-ai/keel/types"
 
-	testutil "github.com/keel-hq/keel/util/testing"
+	testutil "github.com/datagravity-ai/keel/util/testing"
 
 	log "github.com/sirupsen/logrus"
 )

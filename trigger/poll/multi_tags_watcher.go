@@ -1,10 +1,10 @@
 package poll
 
 import (
-	"github.com/keel-hq/keel/extension/credentialshelper"
-	"github.com/keel-hq/keel/provider"
-	"github.com/keel-hq/keel/registry"
-	"github.com/keel-hq/keel/types"
+	"github.com/datagravity-ai/keel/extension/credentialshelper"
+	"github.com/datagravity-ai/keel/provider"
+	"github.com/datagravity-ai/keel/registry"
+	"github.com/datagravity-ai/keel/types"
 
 	"github.com/prometheus/client_golang/prometheus"
 

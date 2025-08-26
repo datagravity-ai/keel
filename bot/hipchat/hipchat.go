@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/keel-hq/keel/bot"
-	"github.com/keel-hq/keel/constants"
+	"github.com/datagravity-ai/keel/bot"
+	"github.com/datagravity-ai/keel/constants"
 
 	h "github.com/daneharrigan/hipchat"
 	log "github.com/sirupsen/logrus"

@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/keel-hq/keel/constants"
-	"github.com/keel-hq/keel/registry/docker"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/datagravity-ai/keel/registry/docker"
 )
 
 func TestDigest(t *testing.T) {
@@ -43,7 +43,9 @@ func TestOCIDigest(t *testing.T) {
 		t.Errorf("error while getting digest: %s", err)
 	}
 
-	if digest != "sha256:84015c9306cc58f4be8b09c1adc62cfc3b2648b1430e9c15901482f3d870bd14" {
+	// This label has been updated in the past, so pinning to a specific digest
+	// doesn't make a lot of sense.
+	if ! strings.HasPrefix(digest, "sha256:") {
 		t.Errorf("unexpected digest: %s", digest)
 	}
 }
