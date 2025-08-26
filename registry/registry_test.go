@@ -324,8 +324,8 @@ var tagsResp = `{
   }`
 
 func TestGetDockerHubManyTags(t *testing.T) {
-	client := docker.New("https://quay.io", "", "")
-	tags, err := client.Tags("coreos/prometheus-operator")
+	client := docker.New("https://ghcr.io", "", "")
+	tags, err := client.Tags("prometheus-operator/prometheus-operator")
 	if err != nil {
 		t.Errorf("error while getting repo: %s", err)
 	}
