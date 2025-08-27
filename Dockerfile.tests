@@ -1,4 +1,4 @@
-FROM golang:1.24.1
+FROM golang:1.25.0
 
 # Install tparse and go-junit-report
 RUN go install github.com/mfridman/tparse@latest && \
