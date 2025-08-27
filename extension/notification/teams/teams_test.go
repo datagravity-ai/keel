@@ -1,15 +1,15 @@
 package teams
 
 import (
+	"fmt"
+	"github.com/datagravity-ai/keel/constants"
+	"github.com/datagravity-ai/keel/types"
+	"github.com/datagravity-ai/keel/version"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
-
-	"github.com/datagravity-ai/keel/constants"
-	"github.com/datagravity-ai/keel/types"
-	"github.com/datagravity-ai/keel/version"
 )
 
 func TestTrimLeftChar(t *testing.T) {
