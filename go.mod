@@ -66,8 +66,8 @@ require (
 	cloud.google.com/go/storage v1.51.0
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/distribution/distribution/v3 v3.0.0-20230722181636-7b502560cad4
-	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang-jwt/jwt/v4 v4.5.2
+	github.com/golang-jwt/jwt/v5 v5.3.0
 	golang.org/x/oauth2 v0.28.0
 	helm.sh/helm/v3 v3.17.2
 )
