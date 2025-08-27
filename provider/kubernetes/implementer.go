@@ -3,7 +3,6 @@ package kubernetes
 import (
 	"context"
 	"fmt"
-
 	"github.com/datagravity-ai/keel/internal/k8s"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"

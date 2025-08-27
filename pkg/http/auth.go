@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/datagravity-ai/keel/pkg/auth"
-	request "github.com/golang-jwt/jwt/request"
+	request "github.com/golang-jwt/jwt/v5/request"
 	log "github.com/sirupsen/logrus"
 )
 

@@ -118,6 +118,44 @@ resource "helm_release" "keel" {
 }
 ```
 
+To install using terraform:
+
+```terraform
+resource "helm_release" "keel" {
+  provider   = helm.helm
+  name       = "keel"
+  namespace  = "keel"
+  repository = "https://keel-hq.github.io/keel"
+  chart      = "keel"
+  version    = "v1.0.4"
+
+  set {
+    name  = "basicauth.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "basicauth.user"
+    value = "admin"
+  }
+
+  set {
+    name  = "basicauth.password"
+    value = "admin"
+  }
+
+  set {
+    name  = "image.repository"
+    value = "keelhq/keel"
+  }
+
+  set {
+    name  = "image.tag"
+    value = "0.19.1"
+  }
+}
+```
+
 That's it, see [Configuration](https://github.com/keel-hq/keel#configuration) section now.
 
 ### Quick Start
