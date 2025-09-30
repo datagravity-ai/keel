@@ -95,7 +95,8 @@ mattermost:
 teams:
   enabled: false
   webhookUrl: ""
-
+  format: "auto"
+  
 # Discord notifications
 discord:
   enabled: false
