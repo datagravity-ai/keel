@@ -102,6 +102,7 @@ The following table lists has the main configurable parameters (polling, trigger
 | `teams.enabled`                             | Enable/disable MS Teams Notification   | `false`                                                   |
 | `teams.webhookUrl`                          | MS Teams Connector's webhook url       |                                                           |
 | `service.enabled`                           | Enable/disable Keel service            | `false`                                                   |
+| `teams.format`                              | Teams webhook format: auto/messagecard/adaptive | `auto`                                              |
 | `service.type`                              | Keel service type                      | `LoadBalancer`                                            |
 | `service.externalIP`                        | Keel static IP                         |                                                           |
 | `service.externalPort`                      | Keel service port                      | `9300`                                                    |
