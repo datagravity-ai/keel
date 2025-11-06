@@ -32,7 +32,7 @@ require (
 	cloud.google.com/go/pubsub v1.50.0
 	github.com/Masterminds/semver v1.5.0
 	github.com/aws/aws-sdk-go v1.55.8
-	github.com/containerd/containerd v1.7.27 // indirect
+	github.com/containerd/containerd v1.7.29 // indirect
 	github.com/daneharrigan/hipchat v0.0.0-20170512185232-835dc879394a
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/google/uuid v1.6.0
