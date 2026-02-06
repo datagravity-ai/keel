@@ -29,7 +29,7 @@ replace (
 replace k8s.io/kubernetes => k8s.io/kubernetes v1.31.0
 
 require (
-	cloud.google.com/go/pubsub v1.50.0
+	cloud.google.com/go/pubsub v1.50.1
 	github.com/Masterminds/semver v1.5.0
 	github.com/aws/aws-sdk-go v1.55.8
 	github.com/containerd/containerd v1.7.29 // indirect
