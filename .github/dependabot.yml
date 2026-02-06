@@ -5,11 +5,17 @@ updates:
     directory: "/"
     schedule: 
       interval: "daily"
+    assignees:
+    - "@knechtionscoding"
   - package-ecosystem: "docker"
     directory: "/"
     schedule: 
       interval: "daily"
+    assignees:
+    - "@knechtionscoding"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule: 
       interval: "daily"
+    assignees:
+    - "@knechtionscoding"
