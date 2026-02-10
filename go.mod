@@ -28,7 +28,7 @@ require (
 	github.com/urfave/negroni v1.0.0
 	golang.org/x/crypto v0.47.0 // indirect
 	golang.org/x/net v0.49.0
-	google.golang.org/api v0.265.0
+	google.golang.org/api v0.266.0
 	google.golang.org/grpc v1.78.0
 	k8s.io/api v0.35.0
 	k8s.io/apimachinery v0.35.0
@@ -44,7 +44,7 @@ require (
 	github.com/distribution/reference v0.6.0
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/golang-jwt/jwt/v5 v5.3.1
-	golang.org/x/oauth2 v0.34.0
+	golang.org/x/oauth2 v0.35.0
 	helm.sh/helm/v3 v3.20.0
 )
 
