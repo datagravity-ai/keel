@@ -1,6 +1,7 @@
 package kubernetes
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -14,7 +15,9 @@ import (
 
 	apps_v1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/core/v1"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	core_v1 "k8s.io/client-go/kubernetes/typed/core/v1"
 )
 
@@ -95,6 +98,13 @@ func (i *fakeImplementer) DeletePod(namespace, name string, opts *meta_v1.Delete
 
 func (i *fakeImplementer) ConfigMaps(namespace string) core_v1.ConfigMapInterface {
 	return nil
+}
+
+func (i *fakeImplementer) Get(namespace, name, kind string) (*k8s.GenericResource, error) {
+	if i.deployment != nil {
+		return k8s.NewGenericResource(i.deployment.DeepCopy())
+	}
+	return nil, fmt.Errorf("resource not found")
 }
 
 type fakeSender struct {
@@ -1644,6 +1654,114 @@ func TestTrackedImagesWithSecrets(t *testing.T) {
 	}
 	if imgs[0].Secrets[1] != "very-secret" {
 		t.Errorf("expected very-secret, got: %s", imgs[0].Secrets[1])
+	}
+}
+
+// conflictFakeImplementer simulates a 409 conflict on the first Update call.
+type conflictFakeImplementer struct {
+	fakeImplementer
+	updateCallCount int
+	// latestDeployment is what Get returns (simulates the current cluster state)
+	latestDeployment *apps_v1.Deployment
+}
+
+func (i *conflictFakeImplementer) Update(obj *k8s.GenericResource) error {
+	i.updateCallCount++
+	if i.updateCallCount == 1 {
+		return apierrors.NewConflict(
+			schema.GroupResource{Group: "apps", Resource: "deployments"},
+			obj.Name,
+			fmt.Errorf("the object has been modified"),
+		)
+	}
+	i.updated = obj
+	return nil
+}
+
+func (i *conflictFakeImplementer) Get(namespace, name, kind string) (*k8s.GenericResource, error) {
+	if i.latestDeployment != nil {
+		return k8s.NewGenericResource(i.latestDeployment.DeepCopy())
+	}
+	return i.fakeImplementer.Get(namespace, name, kind)
+}
+
+func TestProcessEvent_RetryOnConflict(t *testing.T) {
+	fp := &conflictFakeImplementer{}
+	fp.namespaces = &v1.NamespaceList{
+		Items: []v1.Namespace{
+			{
+				meta_v1.TypeMeta{},
+				meta_v1.ObjectMeta{Name: "ns-1"},
+				v1.NamespaceSpec{},
+				v1.NamespaceStatus{},
+			},
+		},
+	}
+
+	dep := &apps_v1.Deployment{
+		meta_v1.TypeMeta{},
+		meta_v1.ObjectMeta{
+			Name:            "deployment-1",
+			Namespace:       "ns-1",
+			Labels:          map[string]string{types.KeelPolicyLabel: "all"},
+			Annotations:     map[string]string{},
+			ResourceVersion: "1000",
+		},
+		apps_v1.DeploymentSpec{
+			Template: v1.PodTemplateSpec{
+				ObjectMeta: meta_v1.ObjectMeta{
+					Annotations: map[string]string{},
+				},
+				Spec: v1.PodSpec{
+					Containers: []v1.Container{
+						{
+							Name:  "main",
+							Image: "gcr.io/v2-namespace/hello-world:1.1.1",
+						},
+					},
+				},
+			},
+		},
+		apps_v1.DeploymentStatus{},
+	}
+
+	// latestDeployment simulates what the API server returns on re-fetch —
+	// same deployment but with a bumped resourceVersion (as if another controller modified it).
+	latestDep := dep.DeepCopy()
+	latestDep.ResourceVersion = "1001"
+	fp.latestDeployment = latestDep
+
+	grs := MustParseGRS([]*apps_v1.Deployment{dep})
+	grc := &k8s.GenericResourceCache{}
+	grc.Add(grs...)
+	approver, teardown := approver()
+	defer teardown()
+	provider, err := NewProvider(fp, &fakeSender{}, approver, grc)
+	if err != nil {
+		t.Fatalf("failed to get provider: %s", err)
+	}
+
+	repo := types.Repository{
+		Name: "gcr.io/v2-namespace/hello-world",
+		Tag:  "1.4.5",
+	}
+
+	event := &types.Event{Repository: repo}
+	_, err = provider.processEvent(event)
+	if err != nil {
+		t.Fatalf("got error while processing event: %s", err)
+	}
+
+	if fp.updateCallCount != 2 {
+		t.Errorf("expected 2 Update calls (1 conflict + 1 success), got: %d", fp.updateCallCount)
+	}
+
+	if fp.updated == nil {
+		t.Fatalf("resource was not updated")
+	}
+
+	if fp.updated.Containers()[0].Image != repo.Name+":"+repo.Tag {
+		t.Errorf("expected image %s:%s but got: %s", repo.Name, repo.Tag, fp.updated.Containers()[0].Image)
 	}
 }
 

@@ -36,6 +36,14 @@ func (i *FakeK8sImplementer) Namespaces() (*v1.NamespaceList, error) {
 	return i.NamespacesList, nil
 }
 
+// Get - get a single resource by namespace, name, and kind
+func (i *FakeK8sImplementer) Get(namespace, name, kind string) (*k8s.GenericResource, error) {
+	if i.DeploymentSingle != nil {
+		return k8s.NewGenericResource(i.DeploymentSingle.DeepCopy())
+	}
+	return nil, fmt.Errorf("resource not found")
+}
+
 // Deployment - available deployment, doesn't filter anything
 func (i *FakeK8sImplementer) Deployment(namespace, name string) (*apps_v1.Deployment, error) {
 	return i.DeploymentSingle, nil

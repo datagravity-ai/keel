@@ -22,6 +22,7 @@ import (
 type Implementer interface {
 	Namespaces() (*v1.NamespaceList, error)
 	Deployments(namespace string) (*apps_v1.DeploymentList, error)
+	Get(namespace, name, kind string) (*k8s.GenericResource, error)
 	Update(obj *k8s.GenericResource) error
 	Secret(namespace, name string) (*v1.Secret, error)
 	Pods(namespace, labelSelector string) (*v1.PodList, error)
@@ -119,16 +120,40 @@ func (i *KubernetesImplementer) Deployments(namespace string) (*apps_v1.Deployme
 	return l, err
 }
 
+// Get fetches a single resource by namespace, name, and kind from the API server
+func (i *KubernetesImplementer) Get(namespace, name, kind string) (*k8s.GenericResource, error) {
+	switch kind {
+	case "deployment":
+		obj, err := i.client.AppsV1().Deployments(namespace).Get(context.TODO(), name, meta_v1.GetOptions{})
+		if err != nil {
+			return nil, err
+		}
+		return k8s.NewGenericResource(obj)
+	case "statefulset":
+		obj, err := i.client.AppsV1().StatefulSets(namespace).Get(context.TODO(), name, meta_v1.GetOptions{})
+		if err != nil {
+			return nil, err
+		}
+		return k8s.NewGenericResource(obj)
+	case "daemonset":
+		obj, err := i.client.AppsV1().DaemonSets(namespace).Get(context.TODO(), name, meta_v1.GetOptions{})
+		if err != nil {
+			return nil, err
+		}
+		return k8s.NewGenericResource(obj)
+	case "cronjob":
+		obj, err := i.client.BatchV1().CronJobs(namespace).Get(context.TODO(), name, meta_v1.GetOptions{})
+		if err != nil {
+			return nil, err
+		}
+		return k8s.NewGenericResource(obj)
+	default:
+		return nil, fmt.Errorf("unsupported resource kind: %s", kind)
+	}
+}
+
 // Update converts generic resource into specific kubernetes type and updates it
 func (i *KubernetesImplementer) Update(obj *k8s.GenericResource) error {
-	// retryErr := retry.RetryOnConflict(retry.DefaultRetry, func() error {
-	// 	// Retrieve the latest version of Deployment before attempting update
-	// 	// RetryOnConflict uses exponential backoff to avoid exhausting the apiserver
-	// 	_, updateErr := i.client.Extensions().Deployments(deployment.Namespace).Update(deployment)
-	// 	return updateErr
-	// })
-	// return retryErr
-
 	switch resource := obj.GetResource().(type) {
 	case *apps_v1.Deployment:
 		_, err := i.client.AppsV1().Deployments(resource.Namespace).Update(context.TODO(), resource, meta_v1.UpdateOptions{})
