@@ -379,7 +379,11 @@ func (p *Provider) updateDeployments(plans []*UpdatePlan) (updated []*k8s.Generi
 		// Capture the desired state so we can re-apply it on a fresh resource if
 		// the update hits an optimistic concurrency conflict (HTTP 409).
 		desiredImages := extractDesiredImages(resource)
-		desiredSpecAnnotations := resource.GetSpecAnnotations()
+		srcSpecAnnotations := resource.GetSpecAnnotations()
+		desiredSpecAnnotations := make(map[string]string, len(srcSpecAnnotations))
+		for k, v := range srcSpecAnnotations {
+			desiredSpecAnnotations[k] = v
+		}
 
 		firstAttempt := true
 		err = retry.RetryOnConflict(retry.DefaultRetry, func() error {
