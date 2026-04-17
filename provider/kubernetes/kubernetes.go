@@ -22,6 +22,7 @@ import (
 	"github.com/datagravity-ai/keel/util/policies"
 
 	log "github.com/sirupsen/logrus"
+	"k8s.io/client-go/util/retry"
 )
 
 var kubernetesVersionedUpdatesCounter = prometheus.NewCounterVec(
@@ -370,11 +371,42 @@ func (p *Provider) updateDeployments(plans []*UpdatePlan) (updated []*k8s.Generi
 		var err error
 
 		timestamp := time.Now().Format(time.RFC3339)
-		annotations["kubernetes.io/change-cause"] = fmt.Sprintf("keel automated update, version %s -> %s [%s]", plan.CurrentVersion, plan.NewVersion, timestamp)
+		changeCause := fmt.Sprintf("keel automated update, version %s -> %s [%s]", plan.CurrentVersion, plan.NewVersion, timestamp)
+		annotations["kubernetes.io/change-cause"] = changeCause
 
 		resource.SetAnnotations(annotations)
 
-		err = p.implementer.Update(resource)
+		// Capture the desired state so we can re-apply it on a fresh resource if
+		// the update hits an optimistic concurrency conflict (HTTP 409).
+		desiredImages := extractDesiredImages(resource)
+		srcSpecAnnotations := resource.GetSpecAnnotations()
+		desiredSpecAnnotations := make(map[string]string, len(srcSpecAnnotations))
+		for k, v := range srcSpecAnnotations {
+			desiredSpecAnnotations[k] = v
+		}
+
+		firstAttempt := true
+		err = retry.RetryOnConflict(retry.DefaultRetry, func() error {
+			if !firstAttempt {
+				fresh, getErr := p.implementer.Get(resource.Namespace, resource.Name, resource.Kind())
+				if getErr != nil {
+					return getErr
+				}
+				applyDesiredImages(fresh, desiredImages)
+				freshAnnotations := fresh.GetAnnotations()
+				freshAnnotations["kubernetes.io/change-cause"] = changeCause
+				fresh.SetAnnotations(freshAnnotations)
+				freshSpecAnnotations := fresh.GetSpecAnnotations()
+				for k, v := range desiredSpecAnnotations {
+					freshSpecAnnotations[k] = v
+				}
+				fresh.SetSpecAnnotations(freshSpecAnnotations)
+				resource = fresh
+				plan.Resource = fresh
+			}
+			firstAttempt = false
+			return p.implementer.Update(resource)
+		})
 		kubernetesVersionedUpdatesCounter.With(prometheus.Labels{"kubernetes": fmt.Sprintf("%s/%s", resource.Namespace, resource.Name)}).Inc()
 		if err != nil {
 			log.WithFields(log.Fields{
@@ -459,6 +491,46 @@ func (p *Provider) updateDeployments(plans []*UpdatePlan) (updated []*k8s.Generi
 	}
 
 	return
+}
+
+// desiredContainerImage records the target image for a container, identified by name.
+type desiredContainerImage struct {
+	Name  string
+	Image string
+	Init  bool
+}
+
+// extractDesiredImages captures the container names and images from an already-mutated resource.
+func extractDesiredImages(resource *k8s.GenericResource) []desiredContainerImage {
+	var desired []desiredContainerImage
+	for _, c := range resource.Containers() {
+		desired = append(desired, desiredContainerImage{Name: c.Name, Image: c.Image})
+	}
+	for _, c := range resource.InitContainers() {
+		desired = append(desired, desiredContainerImage{Name: c.Name, Image: c.Image, Init: true})
+	}
+	return desired
+}
+
+// applyDesiredImages applies the desired container images onto a resource, matching by container name.
+func applyDesiredImages(resource *k8s.GenericResource, desired []desiredContainerImage) {
+	for _, d := range desired {
+		if d.Init {
+			for idx, c := range resource.InitContainers() {
+				if c.Name == d.Name {
+					resource.UpdateInitContainer(idx, d.Image)
+					break
+				}
+			}
+		} else {
+			for idx, c := range resource.Containers() {
+				if c.Name == d.Name {
+					resource.UpdateContainer(idx, d.Image)
+					break
+				}
+			}
+		}
+	}
 }
 
 func getDesiredImage(delta map[string]string, currentImage string) (string, error) {
