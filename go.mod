@@ -30,10 +30,10 @@ require (
 	golang.org/x/net v0.52.0
 	google.golang.org/api v0.273.1
 	google.golang.org/grpc v1.79.3
-	k8s.io/api v0.35.3
-	k8s.io/apimachinery v0.35.3
-	k8s.io/cli-runtime v0.35.0
-	k8s.io/client-go v0.35.3
+	k8s.io/api v0.35.4
+	k8s.io/apimachinery v0.35.4
+	k8s.io/cli-runtime v0.35.4
+	k8s.io/client-go v0.35.4
 	sigs.k8s.io/yaml v1.6.0
 )
 
