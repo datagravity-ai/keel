@@ -43,6 +43,7 @@ func New(registryURL, username, password string) *Registry {
 			KeepAlive: 30 * time.Second,
 			DualStack: true,
 		}).DialContext,
+		ForceAttemptHTTP2:     true,
 		MaxIdleConns:          10,
 		IdleConnTimeout:       90 * time.Second,
 		TLSHandshakeTimeout:   10 * time.Second,
@@ -64,6 +65,7 @@ func NewInsecure(registryURL, username, password string) *Registry {
 			KeepAlive: 30 * time.Second,
 			DualStack: true,
 		}).DialContext,
+		ForceAttemptHTTP2: true,
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
 		},

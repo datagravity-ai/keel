@@ -13,7 +13,6 @@ import (
 )
 
 func TestDigest(t *testing.T) {
-
 	client := New()
 	digest, err := client.Digest(Opts{
 		Registry: "https://index.docker.io",
@@ -22,7 +21,7 @@ func TestDigest(t *testing.T) {
 	})
 
 	if err != nil {
-		t.Errorf("error while getting digest: %s", err)
+		t.Fatalf("error while getting digest: %s", err)
 	}
 
 	if digest != "sha256:671b6250a0793abdd9603d7f5c6f2fa1b4070661d6f56bcfc7ad5de86574ab48" {
@@ -31,7 +30,6 @@ func TestDigest(t *testing.T) {
 }
 
 func TestOCIDigest(t *testing.T) {
-
 	client := New()
 	digest, err := client.Digest(Opts{
 		Registry: "https://index.docker.io",
@@ -40,12 +38,10 @@ func TestOCIDigest(t *testing.T) {
 	})
 
 	if err != nil {
-		t.Errorf("error while getting digest: %s", err)
+		t.Fatalf("error while getting digest: %s", err)
 	}
 
-	// This label has been updated in the past, so pinning to a specific digest
-	// doesn't make a lot of sense.
-	if ! strings.HasPrefix(digest, "sha256:") {
+	if !strings.HasPrefix(digest, "sha256:") {
 		t.Errorf("unexpected digest: %s", digest)
 	}
 }
@@ -58,14 +54,13 @@ func TestGet(t *testing.T) {
 	})
 
 	if err != nil {
-		t.Errorf("error while getting repo: %s", err)
+		t.Fatalf("error while getting repo: %s", err)
 	}
 
 	fmt.Println(repo.Name)
 	fmt.Println(repo.Tags)
 }
 
-// https://registry.opensource.zalan.do/v2/teapot/external-dns
 func TestGetNonDockerRegistryTags(t *testing.T) {
 	client := New()
 
@@ -75,7 +70,7 @@ func TestGetNonDockerRegistryTags(t *testing.T) {
 	})
 
 	if err != nil {
-		t.Errorf("error while getting repo: %s", err)
+		t.Fatalf("error while getting repo: %s", err)
 	}
 
 	fmt.Println(repo.Name)
@@ -92,7 +87,7 @@ func TestGetNonDockerRegistryManifest(t *testing.T) {
 	})
 
 	if err != nil {
-		t.Errorf("error while getting repo manifest: %s", err)
+		t.Fatalf("error while getting repo manifest: %s", err)
 	}
 
 	if d != "sha256:7aa5175f39a7e8a4172972524302c9a8196f681e40d6ee5d2f6bf0ab7d600fee" {
@@ -117,6 +112,39 @@ func TestGetQuayRegistryManifest(t *testing.T) {
 	}
 }
 
+func TestGetPublicECRTags(t *testing.T) {
+	client := New()
+	repo, err := client.Get(Opts{
+		Registry: "https://public.ecr.aws",
+		Name:     "anomalo/tools/updater",
+	})
+
+	if err != nil {
+		t.Fatalf("error while getting repo: %s", err)
+	}
+
+	if len(repo.Tags) == 0 {
+		t.Error("expected at least one tag")
+	}
+}
+
+func TestGetPublicECRDigest(t *testing.T) {
+	client := New()
+	digest, err := client.Digest(Opts{
+		Registry: "https://public.ecr.aws",
+		Name:     "anomalo/tools/updater",
+		Tag:      "v1",
+	})
+
+	if err != nil {
+		t.Fatalf("error while getting digest: %s", err)
+	}
+
+	if !strings.HasPrefix(digest, "sha256:") {
+		t.Errorf("unexpected digest: %s", digest)
+	}
+}
+
 var EnvArtifactoryUsername = "ARTIFACTORY_USERNAME"
 var EnvArtifactoryPassword = "ARTIFACTORY_PASSWORD"
 
@@ -135,7 +163,7 @@ func TestGetArtifactory(t *testing.T) {
 	})
 
 	if err != nil {
-		t.Errorf("error while getting repo: %s", err)
+		t.Fatalf("error while getting repo: %s", err)
 	}
 
 	fmt.Println(repo.Name)
@@ -327,7 +355,7 @@ func TestGetDockerHubManyTags(t *testing.T) {
 	client := docker.New("https://ghcr.io", "", "")
 	tags, err := client.Tags("prometheus-operator/prometheus-operator")
 	if err != nil {
-		t.Errorf("error while getting repo: %s", err)
+		t.Fatalf("error while getting repo: %s", err)
 	}
 	fmt.Println(tags)
 }
