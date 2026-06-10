@@ -5,7 +5,7 @@ go 1.25.0
 replace k8s.io/kubernetes => k8s.io/kubernetes v1.35.0
 
 require (
-	cloud.google.com/go/pubsub v1.50.1
+	cloud.google.com/go/pubsub v1.50.2
 	github.com/Masterminds/semver v1.5.0
 	github.com/aws/aws-sdk-go v1.55.8
 	github.com/containerd/containerd v1.7.30 // indirect
