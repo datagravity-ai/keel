@@ -334,11 +334,10 @@ func (b *Bot) Respond(text string, channel string) {
 	}
 
 	// longer messages are getting uploaded as files
-	f := slack.FileUploadParameters{
+	f := slack.UploadFileParameters{
 		Filename: "keel response",
 		Content:  text,
-		Filetype: "text",
-		Channels: []string{channel},
+		Channel:  channel,
 	}
 
 	_, err := b.slackSocket.UploadFile(f)
