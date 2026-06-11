@@ -2,10 +2,11 @@ JOBDATE		?= $(shell date -u +%Y-%m-%dT%H%M%SZ)
 GIT_REVISION	= $(shell git rev-parse --short HEAD)
 VERSION		?= $(shell git describe --tags --abbrev=0)
 
-LDFLAGS		+= -linkmode external -extldflags -static
 LDFLAGS		+= -X github.com/datagravity-ai/keel/version.Version=$(VERSION)
 LDFLAGS		+= -X github.com/datagravity-ai/keel/version.Revision=$(GIT_REVISION)
 LDFLAGS		+= -X github.com/datagravity-ai/keel/version.BuildDate=$(JOBDATE)
+
+STATIC_LDFLAGS	= -linkmode external -extldflags -static $(LDFLAGS)
 
 ARMFLAGS		+= -a -v
 ARMFLAGS		+= -X github.com/datagravity-ai/keel/version.Version=$(VERSION)
@@ -57,22 +58,20 @@ test:
 
 build:
 	@echo "++ Building keel"
-	GOOS=linux cd cmd/keel && go build -a -tags netgo -ldflags "$(LDFLAGS) -w -s" -o keel .
+	cd cmd/keel && go build -ldflags "$(LDFLAGS) -w -s" -o keel .
+
+build-linux:
+	@echo "++ Building keel (linux static)"
+	GOOS=linux cd cmd/keel && go build -a -tags netgo -ldflags "$(STATIC_LDFLAGS) -w -s" -o keel .
 
 install:
 	@echo "++ Installing keel"
-	# CGO_ENABLED=0 GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/datagravity-ai/keel/cmd/keel	
-	GOOS=linux go install -ldflags "$(LDFLAGS)" github.com/datagravity-ai/keel/cmd/keel	
+	go install -ldflags "$(LDFLAGS)" github.com/datagravity-ai/keel/cmd/keel
 
 install-debug:
 	@echo "++ Installing keel with debug flags"
 	go install github.com/go-delve/delve/cmd/dlv@latest
-	GOOS=linux go install -gcflags "all=-N -l" -ldflags "$(LDFLAGS)" github.com/keel-hq/keel/cmd/keel
-
-install-debug:
-	@echo "++ Installing keel with debug flags"
-	go install github.com/go-delve/delve/cmd/dlv@latest
-	GOOS=linux go install -gcflags "all=-N -l" -ldflags "$(LDFLAGS)" github.com/keel-hq/keel/cmd/keel
+	go install -gcflags "all=-N -l" -ldflags "$(LDFLAGS)" github.com/datagravity-ai/keel/cmd/keel
 
 image:
 	docker build -t keelhq/keel:alpha -f Dockerfile .
