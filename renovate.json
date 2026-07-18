@@ -1,0 +1,64 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended",
+        ":preserveSemverRanges",
+        "mergeConfidence:all-badges"
+    ],
+    "enabledManagers": [
+        "dockerfile",
+        "github-actions",
+        "gomod"
+    ],
+    "rebaseWhen": "conflicted",
+    "addLabels": [
+        "{{manager}}",
+        "renovate"
+    ],
+    "prHourlyLimit": 10,
+    "prConcurrentLimit": 10,
+    "gitIgnoredAuthors": [
+        "github-actions[bot]@users.noreply.github.com"
+    ],
+    "commitMessagePrefix": "chore({{manager}}):",
+    "packageRules": [
+        {
+            "description": "Wait 7 days before updating Go packages at the patch level",
+            "matchManagers": ["gomod"],
+            "matchUpdateTypes": ["patch"],
+            "minimumReleaseAge": "7 days"
+        },
+        {
+            "description": "Wait 14 days before updating Go packages at the minor level",
+            "matchManagers": ["gomod"],
+            "matchUpdateTypes": ["minor"],
+            "minimumReleaseAge": "14 days"
+        },
+        {
+            "description": "Wait 60 days before updating Go packages at the major level",
+            "matchManagers": ["gomod"],
+            "matchUpdateTypes": ["major"],
+            "minimumReleaseAge": "60 days"
+        },
+        {
+            "description": "Auto-merge GitHub Actions updates after 7 days if CI passes",
+            "matchManagers": ["github-actions"],
+            "minimumReleaseAge": "7 days",
+            "automerge": true
+        },
+        {
+            "description": "Auto-merge Dockerfile image tag updates (patch/minor/digest) after 7 days if CI passes",
+            "matchManagers": ["dockerfile"],
+            "matchUpdateTypes": ["patch", "minor", "digest"],
+            "minimumReleaseAge": "7 days",
+            "automerge": true
+        }
+    ],
+    "lockFileMaintenance": {
+        "enabled": true,
+        "automerge": true
+    },
+    "vulnerabilityAlerts": {
+        "labels": ["security"]
+    }
+}
