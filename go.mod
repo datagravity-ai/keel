@@ -46,6 +46,7 @@ require (
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	golang.org/x/oauth2 v0.36.0
 	helm.sh/helm/v3 v3.21.3
+	helm.sh/helm/v4 v4.2.0
 )
 
 require (
