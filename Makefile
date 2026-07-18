@@ -37,18 +37,7 @@ e2e: install
 
 run:
 	go install github.com/datagravity-ai/keel/cmd/keel
-	keel --no-incluster --ui-dir ui/dist
-
-lint-ui:
-	cd ui && yarn 
-	yarn run lint --no-fix && yarn run build
-
-run-ui:
-	cd ui && yarn run serve
-
-build-ui:
-	docker build -t keelhq/keel:ui -f Dockerfile .
-	docker push keelhq/keel:ui
+	keel --no-incluster
 
 run-debug: install
 	DEBUG=true keel --no-incluster
