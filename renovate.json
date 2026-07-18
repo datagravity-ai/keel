@@ -1,0 +1,63 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended",
+        ":preserveSemverRanges",
+        "mergeConfidence:all-badges"
+    ],
+    "enabledManagers": [
+        "dockerfile",
+        "github-actions",
+        "gomod"
+    ],
+    "automerge": true,
+    "automergeType": "pr",
+    "rebaseWhen": "conflicted",
+    "addLabels": [
+        "{{manager}}",
+        "renovate"
+    ],
+    "prHourlyLimit": 10,
+    "prConcurrentLimit": 10,
+    "gitIgnoredAuthors": [
+        "github-actions[bot]@users.noreply.github.com"
+    ],
+    "commitMessagePrefix": "chore({{manager}}):",
+    "packageRules": [
+        {
+            "description": "Wait 7 days before updating Go packages at the patch level",
+            "matchManagers": ["gomod"],
+            "matchUpdateTypes": ["patch"],
+            "minimumReleaseAge": "7 days"
+        },
+        {
+            "description": "Wait 14 days before updating Go packages at the minor level",
+            "matchManagers": ["gomod"],
+            "matchUpdateTypes": ["minor"],
+            "minimumReleaseAge": "14 days"
+        },
+        {
+            "description": "Wait 60 days before updating Go packages at the major level",
+            "matchManagers": ["gomod"],
+            "matchUpdateTypes": ["major"],
+            "minimumReleaseAge": "60 days"
+        },
+        {
+            "description": "Wait 7 days before updating GitHub Actions",
+            "matchManagers": ["github-actions"],
+            "minimumReleaseAge": "7 days"
+        },
+        {
+            "description": "Wait 7 days before updating Dockerfile image tags (patch/minor/digest)",
+            "matchManagers": ["dockerfile"],
+            "matchUpdateTypes": ["patch", "minor", "digest"],
+            "minimumReleaseAge": "7 days"
+        }
+    ],
+    "lockFileMaintenance": {
+        "enabled": true
+    },
+    "vulnerabilityAlerts": {
+        "labels": ["security"]
+    }
+}
