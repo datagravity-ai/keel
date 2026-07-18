@@ -32,7 +32,7 @@ require (
 	google.golang.org/grpc v1.81.1
 	k8s.io/api v0.36.2
 	k8s.io/apimachinery v0.36.2
-	k8s.io/cli-runtime v0.36.1
+	k8s.io/cli-runtime v0.36.2
 	k8s.io/client-go v0.36.2
 	sigs.k8s.io/yaml v1.6.0
 )
