@@ -16,7 +16,8 @@
     "rebaseWhen": "conflicted",
     "addLabels": [
         "{{manager}}",
-        "renovate"
+        "renovate",
+        "deps"
     ],
     "prHourlyLimit": 10,
     "prConcurrentLimit": 10,
