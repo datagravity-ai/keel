@@ -25,7 +25,7 @@ require (
 	github.com/slack-go/slack v0.27.0
 	github.com/stretchr/testify v1.11.1
 	github.com/tbruyelle/hipchat-go v0.0.0-20170717082847-35aebc99209a
-	github.com/urfave/negroni v1.0.0
+	github.com/urfave/negroni/v3 v3.1.1
 	golang.org/x/crypto v0.53.0 // indirect
 	golang.org/x/net v0.56.0
 	google.golang.org/api v0.287.0
@@ -44,6 +44,7 @@ require (
 	github.com/distribution/reference v0.6.0
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/golang-jwt/jwt/v5 v5.3.1
+	github.com/urfave/negroni v1.0.0
 	golang.org/x/oauth2 v0.36.0
 	helm.sh/helm/v3 v3.21.3
 )
