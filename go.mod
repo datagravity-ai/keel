@@ -32,7 +32,7 @@ require (
 	google.golang.org/grpc v1.81.1
 	k8s.io/api v0.36.2
 	k8s.io/apimachinery v0.36.2
-	k8s.io/cli-runtime v0.36.1
+	k8s.io/cli-runtime v0.36.2
 	k8s.io/client-go v0.36.2
 	sigs.k8s.io/yaml v1.6.0
 )
@@ -45,7 +45,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	golang.org/x/oauth2 v0.36.0
-	helm.sh/helm/v3 v3.21.1
+	helm.sh/helm/v3 v3.21.3
 )
 
 require (
@@ -80,7 +80,7 @@ require (
 	github.com/containerd/errdefs v1.0.0 // indirect
 	github.com/containerd/log v0.1.0 // indirect
 	github.com/containerd/platforms v0.2.1 // indirect
-	github.com/cyphar/filepath-securejoin v0.6.1 // indirect
+	github.com/cyphar/filepath-securejoin v0.7.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/docker/libtrust v0.0.0-20160708172513-aabc10ec26b7 // indirect
 	github.com/emicklei/go-restful/v3 v3.13.0 // indirect
@@ -185,12 +185,12 @@ require (
 	gopkg.in/evanphx/json-patch.v4 v4.13.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/apiextensions-apiserver v0.36.1 // indirect
-	k8s.io/apiserver v0.36.1 // indirect
-	k8s.io/component-base v0.36.1 // indirect
+	k8s.io/apiextensions-apiserver v0.36.2 // indirect
+	k8s.io/apiserver v0.36.2 // indirect
+	k8s.io/component-base v0.36.2 // indirect
 	k8s.io/klog/v2 v2.140.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20260603220949-865597e52e25 // indirect
-	k8s.io/kubectl v0.36.1 // indirect
+	k8s.io/kubectl v0.36.2 // indirect
 	k8s.io/utils v0.0.0-20260507154919-ff6756f316d2 // indirect
 	oras.land/oras-go/v2 v2.6.1 // indirect
 	sigs.k8s.io/json v0.0.0-20250730193827-2d320260d730 // indirect
