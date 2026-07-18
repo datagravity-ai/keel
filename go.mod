@@ -42,7 +42,7 @@ require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/distribution/distribution/v3 v3.1.1
 	github.com/distribution/reference v0.6.0
-	github.com/golang-jwt/jwt/v4 v4.5.2
+	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	golang.org/x/oauth2 v0.36.0
 	helm.sh/helm/v3 v3.21.3
