@@ -10,6 +10,8 @@
         "github-actions",
         "gomod"
     ],
+    "automerge": true,
+    "automergeType": "pr",
     "rebaseWhen": "conflicted",
     "addLabels": [
         "{{manager}}",
@@ -41,22 +43,19 @@
             "minimumReleaseAge": "60 days"
         },
         {
-            "description": "Auto-merge GitHub Actions updates after 7 days if CI passes",
+            "description": "Wait 7 days before updating GitHub Actions",
             "matchManagers": ["github-actions"],
-            "minimumReleaseAge": "7 days",
-            "automerge": true
+            "minimumReleaseAge": "7 days"
         },
         {
-            "description": "Auto-merge Dockerfile image tag updates (patch/minor/digest) after 7 days if CI passes",
+            "description": "Wait 7 days before updating Dockerfile image tags (patch/minor/digest)",
             "matchManagers": ["dockerfile"],
             "matchUpdateTypes": ["patch", "minor", "digest"],
-            "minimumReleaseAge": "7 days",
-            "automerge": true
+            "minimumReleaseAge": "7 days"
         }
     ],
     "lockFileMaintenance": {
-        "enabled": true,
-        "automerge": true
+        "enabled": true
     },
     "vulnerabilityAlerts": {
         "labels": ["security"]
