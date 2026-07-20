@@ -5,7 +5,7 @@ go 1.26.0
 replace k8s.io/kubernetes => k8s.io/kubernetes v1.36.2
 
 require (
-	cloud.google.com/go/pubsub v1.50.4
+	cloud.google.com/go/pubsub/v2 v2.6.0
 	github.com/Masterminds/semver v1.5.0
 	github.com/aws/aws-sdk-go v1.55.8
 	github.com/containerd/containerd v1.7.33 // indirect
@@ -38,6 +38,7 @@ require (
 )
 
 require (
+	cloud.google.com/go/pubsub v1.50.2
 	cloud.google.com/go/storage v1.63.1
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/distribution/distribution/v3 v3.1.1
@@ -56,7 +57,6 @@ require (
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
 	cloud.google.com/go/iam v1.11.0 // indirect
 	cloud.google.com/go/monitoring v1.29.0 // indirect
-	cloud.google.com/go/pubsub/v2 v2.6.0 // indirect
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20240806141605-e8a1dd7889d6 // indirect
 	github.com/Azure/go-ansiterm v0.0.0-20250102033503-faa5f7b0171c // indirect
