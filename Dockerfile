@@ -7,7 +7,8 @@ FROM alpine:latest
 LABEL name="keel"
 LABEL org.opencontainers.image.description Kubernetes Operator to automate Helm, DaemonSet, StatefulSet & Deployment updates
 
-RUN apk --no-cache add ca-certificates
+# renovate: datasource=repology depName=alpine_3_22/openssl versioning=loose
+RUN apk --no-cache add ca-certificates openssl=3.5.7-r0
 
 VOLUME /data
 ENV XDG_DATA_HOME /data
