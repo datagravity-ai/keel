@@ -3,7 +3,7 @@ package pubsub
 import (
 	"encoding/json"
 
-	"cloud.google.com/go/pubsub"
+	"cloud.google.com/go/pubsub/v2"
 	"golang.org/x/net/context"
 
 	"github.com/datagravity-ai/keel/approvals"

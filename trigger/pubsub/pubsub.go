@@ -7,11 +7,14 @@ import (
 
 	"net"
 
-	"cloud.google.com/go/pubsub"
+	"cloud.google.com/go/pubsub/v2"
+	pubsubpb "cloud.google.com/go/pubsub/v2/apiv1/pubsubpb"
 
 	"golang.org/x/net/context"
 	"google.golang.org/api/option"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 
 	"github.com/datagravity-ai/keel/provider"
 	"github.com/datagravity-ai/keel/types"
@@ -28,12 +31,6 @@ type PubsubSubscriber struct {
 	disableAck bool
 
 	client *pubsub.Client
-}
-
-// pubsubImplementer - pubsub implementer
-type pubsubImplementer interface {
-	Subscription(id string) *pubsub.Subscription
-	Receive(ctx context.Context, f func(context.Context, *Message)) error
 }
 
 // Opts - subscriber options
@@ -73,41 +70,49 @@ type Message struct {
 	Tag    string `json:"tag,omitempty"`
 }
 
-func (s *PubsubSubscriber) ensureTopic(ctx context.Context, id string) error {
-	topic := s.client.Topic(id)
-	exists, err := topic.Exists(ctx)
-	if err != nil {
-		return fmt.Errorf("failed to check whether topic exists, error: %s", err)
-	}
+func (s *PubsubSubscriber) topicName(id string) string {
+	return fmt.Sprintf("projects/%s/topics/%s", s.project, id)
+}
 
-	if exists {
+func (s *PubsubSubscriber) subscriptionName(id string) string {
+	return fmt.Sprintf("projects/%s/subscriptions/%s", s.project, id)
+}
+
+func (s *PubsubSubscriber) ensureTopic(ctx context.Context, id string) error {
+	topicName := s.topicName(id)
+	_, err := s.client.TopicAdminClient.GetTopic(ctx, &pubsubpb.GetTopicRequest{Topic: topicName})
+	if err == nil {
 		log.WithFields(log.Fields{
 			"topic": id,
 		}).Debug("trigger.pubsub: topic exists")
 		return nil
 	}
+	if status.Code(err) != codes.NotFound {
+		return fmt.Errorf("failed to check whether topic exists, error: %s", err)
+	}
 
-	_, err = s.client.CreateTopic(ctx, id)
+	_, err = s.client.TopicAdminClient.CreateTopic(ctx, &pubsubpb.Topic{Name: topicName})
 	return err
 }
 
 func (s *PubsubSubscriber) ensureSubscription(ctx context.Context, subscriptionID, topicID string) error {
-	sub := s.client.Subscription(subscriptionID)
-	exists, err := sub.Exists(ctx)
-	if err != nil {
-		return fmt.Errorf("failed to check whether subscription exists, error: %s", err)
-	}
-	if exists {
+	subName := s.subscriptionName(subscriptionID)
+	_, err := s.client.SubscriptionAdminClient.GetSubscription(ctx, &pubsubpb.GetSubscriptionRequest{Subscription: subName})
+	if err == nil {
 		log.WithFields(log.Fields{
 			"subscription": subscriptionID,
 			"topic":        topicID,
 		}).Debug("trigger.pubsub: subscription exists")
 		return nil
 	}
+	if status.Code(err) != codes.NotFound {
+		return fmt.Errorf("failed to check whether subscription exists, error: %s", err)
+	}
 
-	_, err = s.client.CreateSubscription(ctx, subscriptionID, pubsub.SubscriptionConfig{
-		Topic:       s.client.Topic(topicID),
-		AckDeadline: 10 * time.Second,
+	_, err = s.client.SubscriptionAdminClient.CreateSubscription(ctx, &pubsubpb.Subscription{
+		Name:               subName,
+		Topic:              s.topicName(topicID),
+		AckDeadlineSeconds: 10,
 	})
 	if err != nil {
 		return fmt.Errorf("failed to create subscription %s, error: %s", subscriptionID, err)
@@ -128,7 +133,7 @@ func (s *PubsubSubscriber) Subscribe(ctx context.Context, topic, subscription st
 		return err
 	}
 
-	sub := s.client.Subscription(subscription)
+	sub := s.client.Subscriber(subscription)
 	log.WithFields(log.Fields{
 		"topic":        topic,
 		"subscription": subscription,
