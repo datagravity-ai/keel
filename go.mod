@@ -8,7 +8,6 @@ require (
 	cloud.google.com/go/pubsub v1.50.4
 	github.com/Masterminds/semver v1.5.0
 	github.com/aws/aws-sdk-go v1.55.8
-	github.com/containerd/containerd v1.7.33 // indirect
 	github.com/daneharrigan/hipchat v0.0.0-20170512185232-835dc879394a
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/google/uuid v1.6.0
@@ -77,9 +76,6 @@ require (
 	github.com/chai2010/gettext-go v1.0.3 // indirect
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/cncf/xds/go v0.0.0-20260202195803-dba9d589def2 // indirect
-	github.com/containerd/errdefs v1.0.0 // indirect
-	github.com/containerd/log v0.1.0 // indirect
-	github.com/containerd/platforms v0.2.1 // indirect
 	github.com/cyphar/filepath-securejoin v0.7.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/docker/libtrust v0.0.0-20160708172513-aabc10ec26b7 // indirect
