@@ -1,18 +1,18 @@
 package aws
 
 import (
+	"context"
 	"encoding/base64"
+	"errors"
 	"fmt"
 	"net/url"
 	"regexp"
 	"strings"
 	"time"
 
-	// "github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/ecr"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/ecr"
+	"github.com/aws/smithy-go"
 
 	"github.com/datagravity-ai/keel/extension/credentialshelper"
 	"github.com/datagravity-ai/keel/types"
@@ -72,9 +72,13 @@ func (h *CredentialsHelper) GetCredentials(image *types.TrackedImage) (*types.Cr
 		return nil, err
 	}
 
+	ctx := context.Background()
+
 	// set region
-	sess := newAwsSession(region)
-	svc := ecr.New(sess)
+	svc, err := newECRClient(ctx, region)
+	if err != nil {
+		return nil, err
+	}
 
 	cached, err := h.cache.Get(registry)
 	if err == nil {
@@ -83,20 +87,12 @@ func (h *CredentialsHelper) GetCredentials(image *types.TrackedImage) (*types.Cr
 
 	input := &ecr.GetAuthorizationTokenInput{}
 
-	result, err := svc.GetAuthorizationToken(input)
+	result, err := svc.GetAuthorizationToken(ctx, input)
 	if err != nil {
-		if aerr, ok := err.(awserr.Error); ok {
-			switch aerr.Code() {
-			case ecr.ErrCodeServerException:
-				fmt.Println(ecr.ErrCodeServerException, aerr.Error())
-			case ecr.ErrCodeInvalidParameterException:
-				fmt.Println(ecr.ErrCodeInvalidParameterException, aerr.Error())
-			default:
-				fmt.Println(aerr.Error())
-			}
+		var apiErr smithy.APIError
+		if errors.As(err, &apiErr) {
+			fmt.Println(apiErr.ErrorCode(), apiErr.ErrorMessage())
 		} else {
-			// Print the error, cast err to awserr.Error to get the Code and
-			// Message from an error.
 			log.WithFields(log.Fields{
 				"error": err,
 			}).Error("credentialshelper.aws: failed to get authorization token")
@@ -137,12 +133,13 @@ func (h *CredentialsHelper) GetCredentials(image *types.TrackedImage) (*types.Cr
 	return nil, fmt.Errorf("not found")
 }
 
-func newAwsSession(region string) *session.Session {
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region: aws.String(region),
-	}))
+func newECRClient(ctx context.Context, region string) (*ecr.Client, error) {
+	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(region))
+	if err != nil {
+		return nil, err
+	}
 
-	return sess
+	return ecr.NewFromConfig(cfg), nil
 }
 
 func decodeBase64Secret(authSecret string) (username, password string, err error) {
