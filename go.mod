@@ -20,7 +20,7 @@ require (
 	github.com/ryanuber/go-glob v1.0.0
 	github.com/sirupsen/logrus v1.9.4
 	github.com/slack-go/slack v0.27.0
-	github.com/stretchr/testify v1.12.0
+	github.com/stretchr/testify v1.12.1
 	github.com/tbruyelle/hipchat-go v0.0.0-20170717082847-35aebc99209a
 	golang.org/x/crypto v0.54.0 // indirect
 	golang.org/x/net v0.57.0
