@@ -2,7 +2,7 @@ module github.com/datagravity-ai/keel
 
 go 1.26.0
 
-replace k8s.io/kubernetes => k8s.io/kubernetes v1.36.4
+replace k8s.io/kubernetes => k8s.io/kubernetes v1.37.0
 
 require (
 	cloud.google.com/go/pubsub/v2 v2.7.0
