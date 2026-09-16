@@ -10,7 +10,7 @@ require (
 	github.com/Masterminds/semver v1.5.0
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/aws/aws-sdk-go-v2/config v1.33.5
-	github.com/aws/aws-sdk-go-v2/service/ecr v1.65.0
+	github.com/aws/aws-sdk-go-v2/service/ecr v1.66.0
 	github.com/aws/smithy-go v1.28.1
 	github.com/daneharrigan/hipchat v0.0.0-20170512185232-835dc879394a
 	github.com/distribution/distribution/v3 v3.1.1
