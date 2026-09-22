@@ -19,7 +19,7 @@
                 "/^Dockerfile$/"
             ],
             "matchStrings": [
-                "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>[\\w.-]+))?[`]?[^\\n]*\\n.*?\\s(?:\\S+=)?(?<currentValue>[0-9]+(?:\\.[0-9]+)*(?:[-+:][\\w\\d\\.]+)*?)(?:\\s|$)"
+                "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: versioning=(?<versioning>[\\w.-]+))?[^\\n]*\\n[^\\n]*?\\s\"?(?:\\S+?[=><~]+)?(?<currentValue>[0-9]+(?:\\.[0-9]+)*(?:[-+:][\\w\\d\\.]+)*?)(?:\"|\\s|$)"
             ],
             "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}loose{{/if}}",
             "depNameTemplate": "{{{depName}}}"
