@@ -13,7 +13,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.66.0
 	github.com/aws/smithy-go v1.28.2
 	github.com/daneharrigan/hipchat v0.0.0-20170512185232-835dc879394a
-	github.com/distribution/distribution/v3 v3.1.1
+	github.com/distribution/distribution/v3 v3.1.2
 	github.com/distribution/reference v0.6.0
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/google/uuid v1.6.0
