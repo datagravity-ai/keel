@@ -6,7 +6,7 @@ replace k8s.io/kubernetes => k8s.io/kubernetes v1.37.1
 
 require (
 	cloud.google.com/go/pubsub/v2 v2.7.0
-	cloud.google.com/go/storage v1.68.0
+	cloud.google.com/go/storage v1.69.0
 	github.com/Masterminds/semver v1.5.0
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/aws/aws-sdk-go-v2/config v1.33.7
@@ -131,7 +131,7 @@ require (
 	github.com/google/pprof v0.0.0-20260906184651-6331bc6350fe // indirect
 	github.com/google/s2a-go v0.1.10 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.22 // indirect
-	github.com/googleapis/gax-go/v2 v2.25.0 // indirect
+	github.com/googleapis/gax-go/v2 v2.26.2 // indirect
 	github.com/gorilla/websocket v1.5.4-0.20250319132907-e064f32e3674 // indirect
 	github.com/gosuri/uitable v0.0.4 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
