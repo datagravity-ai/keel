@@ -32,7 +32,7 @@ require (
 	github.com/urfave/negroni/v3 v3.1.1
 	golang.org/x/net v0.61.0
 	golang.org/x/oauth2 v0.37.0
-	google.golang.org/api v0.305.0
+	google.golang.org/api v0.306.0
 	google.golang.org/grpc v1.84.0
 	helm.sh/helm/v3 v3.22.1
 	k8s.io/api v0.37.1
@@ -135,7 +135,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/golang-lru/arc/v2 v2.0.7 // indirect
-	github.com/huandu/xstrings v1.6.2 // indirect
+	github.com/huandu/xstrings v1.6.3 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
