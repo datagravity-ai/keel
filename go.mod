@@ -29,7 +29,7 @@ require (
 	github.com/slack-go/slack v0.30.1
 	github.com/stretchr/testify v1.12.1
 	github.com/tbruyelle/hipchat-go v0.0.0-20170717082847-35aebc99209a
-	github.com/urfave/negroni/v3 v3.1.1
+	github.com/urfave/negroni/v3 v3.1.2
 	golang.org/x/net v0.61.0
 	golang.org/x/oauth2 v0.37.0
 	google.golang.org/api v0.304.0

@@ -622,6 +622,8 @@ github.com/tbruyelle/hipchat-go v0.0.0-20170717082847-35aebc99209a h1:NRwckPCVMy
 github.com/tbruyelle/hipchat-go v0.0.0-20170717082847-35aebc99209a/go.mod h1:CJEWrlDz1qHCF/nywogFd3AqHUWbKCdpu9pSAdf1OzY=
 github.com/urfave/negroni/v3 v3.1.1 h1:6MS4nG9Jk/UuCACaUlNXCbiKa0ywF9LXz5dGu09v8hw=
 github.com/urfave/negroni/v3 v3.1.1/go.mod h1:jWvnX03kcSjDBl/ShB0iHvx5uOs7mAzZXW+JvJ5XYAs=
+github.com/urfave/negroni/v3 v3.1.2 h1:pi/E2QJqdb+cEHYFxIyiBRwnYwy+/TlvTcmy2tb9m6w=
+github.com/urfave/negroni/v3 v3.1.2/go.mod h1:jWvnX03kcSjDBl/ShB0iHvx5uOs7mAzZXW+JvJ5XYAs=
 github.com/x448/float16 v0.8.4 h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM=
 github.com/x448/float16 v0.8.4/go.mod h1:14CWIYCyZA/cWjXOioeEpHeN/83MdbZDRQHoFcYsOfg=
 github.com/xhit/go-str2duration/v2 v2.2.0 h1:SofrD1D+8IuhhkP+OiG1ij4Zq+FiiYSEY/sORBanDG0=
