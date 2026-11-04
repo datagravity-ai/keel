@@ -32,7 +32,7 @@ require (
 	github.com/urfave/negroni/v3 v3.1.2
 	golang.org/x/net v0.61.0
 	golang.org/x/oauth2 v0.37.0
-	google.golang.org/api v0.306.0
+	google.golang.org/api v0.307.0
 	google.golang.org/grpc v1.84.0
 	helm.sh/helm/v3 v3.22.1
 	k8s.io/api v0.37.2
