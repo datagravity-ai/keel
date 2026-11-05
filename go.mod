@@ -5,7 +5,7 @@ go 1.26.0
 replace k8s.io/kubernetes => k8s.io/kubernetes v1.37.2
 
 require (
-	cloud.google.com/go/pubsub/v2 v2.7.0
+	cloud.google.com/go/pubsub/v2 v2.8.0
 	cloud.google.com/go/storage v1.69.0
 	github.com/Masterminds/semver v1.5.0
 	github.com/alecthomas/kingpin/v2 v2.4.0
