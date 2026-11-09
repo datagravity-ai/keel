@@ -9,8 +9,8 @@ require (
 	cloud.google.com/go/storage v1.70.0
 	github.com/Masterminds/semver v1.5.0
 	github.com/alecthomas/kingpin/v2 v2.4.0
-	github.com/aws/aws-sdk-go-v2/config v1.33.15
-	github.com/aws/aws-sdk-go-v2/service/ecr v1.67.4
+	github.com/aws/aws-sdk-go-v2/config v1.33.16
+	github.com/aws/aws-sdk-go-v2/service/ecr v1.67.5
 	github.com/aws/smithy-go v1.28.8
 	github.com/daneharrigan/hipchat v0.0.0-20170512185232-835dc879394a
 	github.com/distribution/distribution/v3 v3.1.2
@@ -64,18 +64,18 @@ require (
 	github.com/ProtonMail/go-crypto v1.5.2 // indirect
 	github.com/alecthomas/units v0.0.0-20240927000941-0f3dac36c52b // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
-	github.com/aws/aws-sdk-go-v2 v1.47.7 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.20.15 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.20.7 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.10 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.10 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.10 // indirect
+	github.com/aws/aws-sdk-go-v2 v1.47.8 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.20.16 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.20.8 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.11 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.11 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.11 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.24 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.10 // indirect
-	github.com/aws/aws-sdk-go-v2/service/signin v1.12.3 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.39.3 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.44.3 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sts v1.51.8 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.11 // indirect
+	github.com/aws/aws-sdk-go-v2/service/signin v1.12.4 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.39.4 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.44.4 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sts v1.51.9 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -177,7 +177,7 @@ require (
 	github.com/shopspring/decimal v1.6.0 // indirect
 	github.com/spf13/cast v1.10.0 // indirect
 	github.com/spf13/cobra v1.10.2 // indirect
-	github.com/spf13/pflag v1.0.10 // indirect
+	github.com/spf13/pflag v1.1.0 // indirect
 	github.com/spiffe/go-spiffe/v2 v2.9.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	github.com/xhit/go-str2duration/v2 v2.2.0 // indirect
