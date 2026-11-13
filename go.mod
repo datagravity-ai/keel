@@ -32,7 +32,7 @@ require (
 	github.com/urfave/negroni/v3 v3.1.2
 	golang.org/x/net v0.62.0
 	golang.org/x/oauth2 v0.38.0
-	google.golang.org/api v0.313.0
+	google.golang.org/api v0.314.0
 	google.golang.org/grpc v1.85.0
 	helm.sh/helm/v3 v3.22.1
 	k8s.io/api v0.37.2
@@ -166,7 +166,7 @@ require (
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/prometheus/client_model v0.6.3 // indirect
-	github.com/prometheus/common v0.73.1 // indirect
+	github.com/prometheus/common v0.74.0 // indirect
 	github.com/prometheus/procfs v0.23.0 // indirect
 	github.com/redis/go-redis/extra/redisotel/v9 v9.22.0 // indirect
 	github.com/redis/go-redis/v9 v9.22.0 // indirect
